@@ -1,4 +1,3 @@
-require "sinatra/base"
 =begin
 
     Copyright © 2023 Felipe Chiozzotto Gozzani, Heloísa Real, Juliana Barbosa Sandes, Mateus Felipe da Silveira Vieira, Thiago Babtista da Silva Soares
@@ -19,8 +18,11 @@ require "sinatra/base"
     
 =end
 
+require "sinatra/base"
 require "./config/cors"
 require "./config/router"
+
+
 
 module ServerConfig
     def self.defaults

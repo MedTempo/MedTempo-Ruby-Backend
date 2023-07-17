@@ -23,8 +23,6 @@ require "sinatra"
 module Router
     def self.load
 
-        puts "Loaded Controllers:"
-
         Dir["./routes/*/*.rb"].each_with_index do
             | file, index |
 
@@ -33,6 +31,6 @@ module Router
             puts "#{index}) Controller - #{file}"
         end
 
-        puts "\n"
+        puts "\nAll Controllers Have Been Loaded!\n\n"
     end
 end

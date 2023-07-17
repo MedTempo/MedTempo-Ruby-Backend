@@ -23,7 +23,10 @@ require "./config/database"
 
 module IndexGet
     ["/", "/hello"].each do | path | Sinatra::Application::get path do
-        puts Db
+        res = Db.fetch
+
+        
+
         body "hello"      
     end end
 end

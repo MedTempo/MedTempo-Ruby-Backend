@@ -20,9 +20,13 @@
 
 require "sinatra"
 require "net/http"
+require "./config/db-operations"
 
 class Cassandra
     def initialize(config)
+
+        @db_operations = DbOperations::preload
+
         @db_region = config[:region]
         @db_id = config[:id]
         @db_keyspace = config[:keyspace]
@@ -35,9 +39,6 @@ class Cassandra
 
         self.show
         self.is_filled
-
-        self.fetch
-
     end
 
 
@@ -57,11 +58,17 @@ class Cassandra
         end
     end
 
-    private def fetch(adm = false)
-        Net::HTTP.post URI(@db_uri), {}.to_json , {
+    def fetch(adm = false)
+
+
+        puts "Str: #{@db_operations.keys}"
+
+        res = Net::HTTP.post URI(@db_uri), @db_operations["select-user-pessoal"] , {
             "Content-Type" => "application/json",
             "X-Cassandra-Token" => @db_app_token
         }
+
+        puts res
     end
 end
 

@@ -1,0 +1,24 @@
+query SelectAllUserPessoal {
+  usuario_pessoal {
+    values {
+      id
+      data_criacao
+      data_nascimento
+      descricao
+      email
+      hash_senha
+      idade
+      nome
+      sexo
+      sobrenome
+    }
+  }
+}
+
+
+
+var.select-usuario_pessoal
+
+
+var.usuario_pessoal.select_all
+var.usuario_pessoal.select_by
