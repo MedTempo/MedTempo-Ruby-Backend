@@ -1,3 +1,5 @@
+#!/bin/env ruby
+
 require "sinatra"
 require "./config/server"
 

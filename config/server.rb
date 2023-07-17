@@ -5,10 +5,11 @@ require "./config/router"
 module ServerConfig
     def self.defaults
 
-        # Sinatra::Application::set :environment, :production
+         Sinatra::Application::set :environment, :production
 
        if Sinatra::Application::production?
         Sinatra::Application::set :logging, false
+        Sinatra::Application::set :bind, '0.0.0.0'
        else
         Sinatra::Application::set :logging, true
        end
