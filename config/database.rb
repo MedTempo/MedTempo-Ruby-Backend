@@ -20,15 +20,20 @@
 
 require "sinatra"
 require "net/http"
-require "./config/db-operations"
+require "json"
+require "./config/db-prepare"
 
 class Cassandra
+
+    attr_reader :db_operations
+    attr_reader :db_keyspace
+
     def initialize(config)
 
-        @db_operations = DbOperations::preload
+        @db_operations = DbPrepare::preload
 
-        @db_region = config[:region]
         @db_id = config[:id]
+        @db_region = config[:region]
         @db_keyspace = config[:keyspace]
         @db_app_token = config[:token]
 
@@ -38,9 +43,8 @@ class Cassandra
         @db_uri_schema = "#{@uri_struct}-schema"
 
         self.show
-        self.is_filled
+        #self.is_filled
     end
-
 
     private def show 
         if Sinatra::Application::production?
@@ -58,23 +62,31 @@ class Cassandra
         end
     end
 
-    def fetch(adm = false)
+    def execute(query, vars = {}, adm = false)
 
+       if adm == false
+        uri = URI(@db_uri)
+       elsif 
+        uri = URI(@db_uri_schema)
+       end
 
-        puts "Str: #{@db_operations.keys}"
+    
 
-        res = Net::HTTP.post URI(@db_uri), @db_operations["select-user-pessoal"] , {
+        res = Net::HTTP.post uri, JSON.generate({ :query => query, :variables => vars }) , {
             "Content-Type" => "application/json",
             "X-Cassandra-Token" => @db_app_token
         }
 
-        puts res
+        puts res.body
+        return res.body
     end
 end
 
 Db = Cassandra.new({
-        :id => ENV["DB_ID"],
-        :region => ENV["DB_REGION"],
-        :keyspace => ENV["DB_KEYSPACE"],
-        :token => ENV["DB_APPLICATION_TOKEN"],
-    })
+    :id => ENV["DB_ID"],
+    :region => ENV["DB_REGION"],
+    :keyspace => ENV["DB_KEYSPACE"],
+    :token => ENV["DB_APPLICATION_TOKEN"],
+})
+
+

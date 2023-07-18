@@ -14,11 +14,3 @@ query SelectAllUserPessoal {
     }
   }
 }
-
-
-
-var.select-usuario_pessoal
-
-
-var.usuario_pessoal.select_all
-var.usuario_pessoal.select_by

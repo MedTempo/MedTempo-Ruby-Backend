@@ -18,14 +18,20 @@
     
 =end
 
-require "sinatra"
-require "./config/database"
+module DbPrepare
+    def self.preload
+        puts "\n"
+        queries = Hash.new(Hash.new)
+        Dir["./db-operations/*/*.gql"].each_with_index do
+            | file, index |
 
-module UsersGet
-    ["/user-pessoal"].each do | path | Sinatra::Application::get path do
-        res = Db.execute(Db.db_operations["user-pessoal"]["select"])
+            puts "#{index}) Query - #{file}"
 
-        content_type "application/json"
-        body res           
-    end end
-end
+            queries["#{File.dirname(file).split('/').last}"]["#{File.basename(file, '.*')}"] = File.read(file).gsub(/\s\s +/, ' ')
+        end
+
+        puts "\nAll Queries Have Been Loaded!\n"
+
+        return queries
+    end
+end 

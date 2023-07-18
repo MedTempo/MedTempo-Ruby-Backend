@@ -20,13 +20,13 @@
 
 require "sinatra"
 require "./config/database"
+require "json"
 
 module IndexGet
-    ["/", "/hello"].each do | path | Sinatra::Application::get path do
-        res = Db.fetch
+    ["/"].each do | path | Sinatra::Application::get path do
+        res = Db.execute(Db.db_operations["generic"]["select-all"], { :keyspace => Db.db_keyspace }, true)
 
-        
-
-        body "hello"      
+        content_type "application/json"
+        body res      
     end end
 end
