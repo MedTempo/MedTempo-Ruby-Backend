@@ -41,6 +41,7 @@ module UsersPost
             (user["sexo"].kind_of? String)              == false ||
             (user["sobrenome"].kind_of? String)         == false       
         )
+            status 400
             return JSON.generate({ :error => :info_missing })
         end
 

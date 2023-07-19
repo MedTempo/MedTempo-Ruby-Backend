@@ -6,4 +6,4 @@ gem "puma" # Sinatra Dependency
 
 gem "argon2" # Password Hash Generator
 
-# gem "mail" # Mailer System
+gem "rack-test" # Test Suite
