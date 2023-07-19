@@ -77,7 +77,6 @@ class Cassandra
             "X-Cassandra-Token" => @db_app_token
         }
 
-        puts res.body
         return res.body
     end
 end

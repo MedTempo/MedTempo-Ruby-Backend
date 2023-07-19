@@ -1,1 +1,36 @@
-user pessoal insert
+  mutation InsertUserPessoal(
+    $id: Uuid,
+    $nome: String,
+    $sobrenome: String
+    $sexo: Boolean,
+
+    $email: String,
+    $senha: String,
+    $idade: TinyInt,
+    $data_nascimento: Date,
+    $data_criacao: Date,
+    $descricao: String,
+
+  ){
+    user_pessoal: insertusuario_pessoal(value: {
+      id: $id,
+      nome: $nome,
+      sobrenome: $sobrenome,
+      sexo: $sexo,
+
+      email: $email,
+      hash_senha: $senha,
+      
+      idade: $idade,
+      data_nascimento: $data_nascimento,
+      data_criacao: $data_criacao,
+
+      descricao: $descricao,
+    }){
+      value{
+        id,
+        nome,
+        sobrenome
+      }
+    }
+  }
