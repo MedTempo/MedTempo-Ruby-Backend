@@ -29,10 +29,28 @@ module UsersPost
         
         user = JSON.parse(request.body.read)
 
+        if (
+            (user["id"].kind_of? String)                == false ||
+            (user["data_criacao"].kind_of? String)      == false ||
+            (user["data_nascimento"].kind_of? String)   == false ||  
+            (user["descricao"].kind_of? String)         == false ||
+            (user["email"].kind_of? String)             == false ||
+            (user["hash_senha"].kind_of? String)        == false ||
+            (user["idade"].kind_of? String)             == false ||  
+            (user["nome"].kind_of? Number)              == false ||
+            (user["sexo"].kind_of? String)              == false ||
+            (user["sobrenome"].kind_of? String)         == false       
+        )
+            return JSON.generate({ :error => :info_missing })
+        end
+
+
         req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
             
-        if req_email["data"]["usuario_pessoal"]["values"] != nil
-            return body "error user exists"
+        if req_email["data"]["usuario_pessoal"]["values"].empty? == false
+            puts req_email
+            content_type "application/json"
+            return "error #{user["email"]} exists"
         end
 
         puts user

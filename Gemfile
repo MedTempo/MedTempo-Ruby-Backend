@@ -5,3 +5,5 @@ gem "sinatra" # Web Framework
 gem "puma" # Sinatra Dependency
 
 gem "argon2" # Password Hash Generator
+
+# gem "mail" # Mailer System

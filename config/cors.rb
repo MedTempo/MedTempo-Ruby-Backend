@@ -23,7 +23,8 @@ module Cors
         Sinatra::Application::before do 
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Methods"] = methods
-            
+         
+
         end
     end
 end
