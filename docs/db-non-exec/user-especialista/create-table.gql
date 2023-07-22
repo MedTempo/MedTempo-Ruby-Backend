@@ -1,0 +1,60 @@
+mutation createTableUsersPessoal {
+  usuario_especialista: createTable(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    partitionKeys: [
+      { name: "id", type: { basic: UUID } }
+      { name: "email", type: { basic: TEXT } }
+    ]
+    values: [
+      { name: "nome", type: { basic: TEXT } }
+      { name: "sobrenome", type: { basic: TEXT } }
+      {
+        name: "sexo"
+        type: { basic: BOOLEAN } # True - Feminino, False - Masculino
+      }
+      { name: "crm", type: { basic: TEXT } }
+      { name: "local_trabalho", type: { basic: TEXT } }
+      {
+        name: "idade"
+        type: { basic: TINYINT } # Valor máximo de 127 anos
+      }
+      { name: "data_nascimento", type: { basic: DATE } }
+      { name: "hash_senha", type: { basic: TEXT } }
+      { name: "descricao", type: { basic: TEXT } }
+      { name: "data_criacao", type: { basic: DATE } }
+    ]
+    ifNotExists: true
+  )
+
+  idex_nome: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    columnName: "nome"
+    ifNotExists: true
+  )
+  index_sexo: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    columnName: "sexo"
+    ifNotExists: true
+  )
+  index_idade: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    columnName: "idade"
+    ifNotExists: true
+  )
+  index_crm: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    columnName: "idade"
+    ifNotExists: true
+  )
+  index_email: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    columnName: "email"
+    ifNotExists: true
+  )
+}
