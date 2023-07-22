@@ -20,8 +20,8 @@
 
 require "sinatra"
 
-module Router
-    def self.load
+module Load
+    def self.router
 
         Dir["./routes/*/*.rb"].each_with_index do
             | file, index |
@@ -29,6 +29,21 @@ module Router
             require file
 
             puts "#{index}) Controller - #{file}"
+        end
+
+        puts "\nAll Controllers Have Been Loaded!\n\n"
+    end
+
+    def self.helpers
+
+        Dir["./helpers/*.rb"].each_with_index do
+            | file, index |
+
+            require file
+
+            include Sinatra
+
+            puts "#{index}) Helpers - #{file}"
         end
 
         puts "\nAll Controllers Have Been Loaded!\n\n"

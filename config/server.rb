@@ -20,14 +20,16 @@
 
 require "sinatra/base"
 require "./config/cors"
-require "./config/router"
-
+require "./config/loader"
+require "./config/redis"
 
 
 module ServerConfig
     def self.defaults
 
         # Sinatra::Application::set :environment, :production
+
+        Sinatra::Application::set :sessions, true
 
        if Sinatra::Application::production?
         Sinatra::Application::set :logging, false
@@ -38,6 +40,10 @@ module ServerConfig
 
         Sinatra::Application::set :port, ENV["PORT"]
         Cors::allow
-        Router::load
+        Load::router
+        Load::helpers
+
+        puts RedisCache::cache.get("hello")
+
     end
 end

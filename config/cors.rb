@@ -24,7 +24,11 @@ module Cors
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Methods"] = methods
          
+           content_type "application/json"
 
+           @user = session[:id]
+
+           puts @user
         end
     end
 end

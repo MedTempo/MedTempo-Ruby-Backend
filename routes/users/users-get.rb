@@ -24,8 +24,6 @@ require "./config/database"
 module UsersGet
     ["/user-pessoal"].each do | path | Sinatra::Application::get path do
         res = Db.execute(Db.db_operations["user-pessoal"]["select"])
-
-        content_type "application/json"
         body res           
     end end
 end

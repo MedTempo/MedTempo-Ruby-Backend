@@ -29,29 +29,11 @@ module UsersPost
         
         user = JSON.parse(request.body.read)
 
-        if (
-            (user["id"].kind_of? String)                == false ||
-            (user["data_criacao"].kind_of? String)      == false ||
-            (user["data_nascimento"].kind_of? String)   == false ||  
-            (user["descricao"].kind_of? String)         == false ||
-            (user["email"].kind_of? String)             == false ||
-            (user["hash_senha"].kind_of? String)        == false ||
-            (user["idade"].kind_of? String)             == false ||  
-            (user["nome"].kind_of? Number)              == false ||
-            (user["sexo"].kind_of? String)              == false ||
-            (user["sobrenome"].kind_of? String)         == false       
-        )
-            status 400
-            return JSON.generate({ :error => :info_missing })
-        end
-
-
         req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
             
         if req_email["data"]["usuario_pessoal"]["values"].empty? == false
             puts req_email
-            content_type "application/json"
-            return "error #{user["email"]} exists"
+            return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" })
         end
 
         puts user
@@ -63,7 +45,7 @@ module UsersPost
             user["sexo"] = false
         end
 
-        argon2 = Argon2::Password.new
+        argon2 = Argon2::Password.new(secret: ENV["A2_SECRET"])
         user["senha"] = argon2.create(user["senha"])
         user["data_criacao"] = Time.now.strftime("%Y-%m-%d")
         
@@ -71,8 +53,6 @@ module UsersPost
         res = Db.execute(Db.db_operations["user-pessoal"]["insert"], user, false)
 
         puts res
-
-        content_type "application/json"
         body res           
     end end
 end

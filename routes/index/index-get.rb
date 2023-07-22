@@ -24,9 +24,8 @@ require "json"
 
 module IndexGet
     ["/"].each do | path | Sinatra::Application::get path do
+        protection!
         res = Db.execute(Db.db_operations["generic"]["select-all"], { :keyspace => Db.db_keyspace }, true)
-
-        content_type "application/json"
         body res      
     end end
 end

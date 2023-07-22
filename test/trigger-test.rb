@@ -37,54 +37,53 @@ class MedTempoTestes < Test::Unit::TestCase
         #puts res
     end
 
+    @@mock_email =  "#{(1...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join}@foo.com"
+    @@mock_pass =  "#{(1...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join}"
 
     def test_it_UserPessoalPost
 
     
         mock_usr = {
-            :data_nascimento => Time.now.strftime("%Y-%m-%d"),
-            :descricao => 100.times.map { (0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join }.join(" "),
-            :email => "#{(0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join}@foo.com",
-            :senha =>(0...(rand(15))).map { ('a'..'z').to_a[rand(26)] }.join,
-            :idade => rand(127),
-            :nome => (0...(rand(8))).map { ('a'..'z').to_a[rand(26)] }.join,
-            :sexo => [ true, false ].sample,
-            :nome => (0...(rand(7))).map { ('a'..'z').to_a[rand(26)] }.join,
+            "nome"=>"oi",
+            "sobrenome"=>"ooi",\
+            "idade"=>23, 
+            "sexo"=>"true", 
+            "email"=> @@mock_email,
+            "senha"=> @@mock_pass, 
+            "data_nascimento"=>"2023-08-04", 
+            "descricao"=>"ddd"
         }
+        
 
         puts mock_usr
 
-        post "/user-pessoal", JSON.generate(mock_usr)
-
-    
-        assert last_response.ok?
+        post "/user-pessoal", JSON.generate(mock_usr), { "Content Type" => "application/json" }
 
         puts JSON.generate(last_response.body)
     
-    end
+        assert last_response.ok?
 
-    def test_it_UserPessoalPost_invalid_data
 
     
+    end
+
+
+    def test_it_YLogin 
         mock_usr = {
-            :data_nascimento => Time.now.strftime("%Y-%m-%d"),
-            :descricao => 100.times.map { (0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join }.join(" "),
-            :email => "#{(0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join}@foo.com",
-            :senha =>(0...(rand(15))).map { ('a'..'z').to_a[rand(26)] }.join,
-            :idade => rand(127),
-            :nome => (0...(rand(8))).map { ('a'..'z').to_a[rand(26)] }.join,
-            :sexo => [ true, false ].sample,
-            #:nome => (0...(rand(7))).map { ('a'..'z').to_a[rand(26)] }.join,
+            "email"=> @@mock_email,
+            "senha"=> @@mock_pass, 
+            "user_type" => 1,
         }
 
-        puts mock_usr
-
-        post "/user-pessoal", JSON.generate(mock_usr)
-
-    
-        assert last_response.ok?
+        post "/login", JSON.generate(mock_usr), { "Content Type" => "application/json" }
 
         puts JSON.generate(last_response.body)
-    
-    end
+
+        assert last_response.ok?
+
+        get "/"
+
+        assert last_response.ok?
+
+    end    
 end
