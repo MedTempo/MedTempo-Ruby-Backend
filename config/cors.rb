@@ -18,6 +18,7 @@
     
 =end
 
+# Configure Cors Headers
 module Cors
     def self.allow(origin = "*", methods = "POST, GET, PATCH, DELETE, OPTIONS") 
         Sinatra::Application::before do 

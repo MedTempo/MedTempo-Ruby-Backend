@@ -23,6 +23,8 @@ require "net/http"
 require "json"
 require "./config/db-prepare"
 
+
+# Class to connect to Cassandra On Datastax by Graphql API
 class Cassandra
 
     attr_reader :db_operations

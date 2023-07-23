@@ -21,6 +21,8 @@
 require "sinatra"
 
 module Load
+
+    # Load Controllers 
     def self.router
 
         Dir["./routes/*/*.rb"].each_with_index do
@@ -34,6 +36,7 @@ module Load
         puts "\nAll Controllers Have Been Loaded!\n\n"
     end
 
+    # Load Helpers
     def self.helpers
 
         Dir["./helpers/*.rb"].each_with_index do

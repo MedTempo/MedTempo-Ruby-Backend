@@ -1,6 +1,7 @@
 require "sinatra"
 require "json"
 
+# Checks if user is authenticated, if not send a error back to client
 module Sinatra
   module Auth
     def protection!

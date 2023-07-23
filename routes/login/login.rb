@@ -5,6 +5,8 @@ require "json"
 require "argon2"
 require "jwt"
 
+
+# Realize Login for any type of user
 module LoginPost
     ["/login"].each do | path | Sinatra::Application::post path do
 

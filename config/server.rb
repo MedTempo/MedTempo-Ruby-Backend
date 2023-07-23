@@ -22,6 +22,7 @@ require "sinatra/base"
 require "./config/cors"
 require "./config/loader"
 
+# Sinatra Configurations
 module ServerConfig
     def self.defaults
 
@@ -40,8 +41,13 @@ module ServerConfig
 
         Sinatra::Application::set :port, ENV["PORT"]
         
+        # Set Cors Configs
         Cors::allow
+
+        # Load Controllers
         Load::router
+
+        # Load Helpers
         Load::helpers
 
     end

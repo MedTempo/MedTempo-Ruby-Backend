@@ -18,6 +18,8 @@
     
 =end
 
+# Load the Graphql Queries on Memory
+
 module DbPrepare
     def self.preload
         puts "\n"
