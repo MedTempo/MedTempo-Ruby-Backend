@@ -1,0 +1,22 @@
+
+name: MedTempo Ruby Backend CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+   branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build MedTempo Ruby Backend CI Docker Container
+    - run: ls -la
+    #- run: docker build -t medtempo-backend:$(date +%s) --target test --file Dockerfile . 
+    #- run: docker run -it --name backend-instance --rm --env-file .env --network host medtempo-backend
+    
