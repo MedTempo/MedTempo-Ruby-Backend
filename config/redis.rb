@@ -1,3 +1,4 @@
+=begin
 require "redis"
 
     Cache = Redis.new(host: ENV["REDIS_HOST"], port: ENV["REDIS_PORT"], username:  ENV["REDIS_USR"], password: ENV["REDIS_PASS"]) 
@@ -5,3 +6,4 @@ require "redis"
     #cache.set "hello", "world"
 
 
+=end
