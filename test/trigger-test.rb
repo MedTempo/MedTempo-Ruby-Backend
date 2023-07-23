@@ -8,6 +8,7 @@ require "rack/test"
 
 class MedTempoTestes < Test::Unit::TestCase
     include Rack::Test::Methods
+    self.test_order = :defined
 
     @@db_id = ENV["DB_ID"]
     @@db_region = ENV["DB_REGION"]
@@ -23,19 +24,21 @@ class MedTempoTestes < Test::Unit::TestCase
         Sinatra::Application
     end
     
-    def test_it_IndexGet
+    def test_it_IndexGet_Error
         get "/"
 
-        assert last_response.ok?
+        assert last_response.status == 400
 
         res = JSON.parse(last_response.body)
 
-        assert res["data"]["keyspace"]["name"] == @@db_keyspace
+        #assert res["data"]["keyspace"]["name"] == @@db_keyspace
 
-        assert res["data"]["keyspace"]["tables"].empty? == false
+        #assert res["data"]["keyspace"]["tables"].empty? == false
 
         #puts res
     end
+
+
 
     @@mock_email =  "#{(1...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join}@foo.com"
     @@mock_pass =  "#{(1...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join}"
@@ -62,13 +65,11 @@ class MedTempoTestes < Test::Unit::TestCase
         puts JSON.generate(last_response.body)
     
         assert last_response.ok?
-
-
     
     end
 
 
-    def test_it_YLogin 
+    def test_it_Login 
         mock_usr = {
             "email"=> @@mock_email,
             "senha"=> @@mock_pass, 
@@ -84,6 +85,8 @@ class MedTempoTestes < Test::Unit::TestCase
         get "/"
 
         assert last_response.ok?
+
+        puts last_response.headers
 
     end    
 end

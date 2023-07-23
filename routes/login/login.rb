@@ -34,8 +34,7 @@ module LoginPost
        elsif usr_type == 3
         return body JSON.generate({ :user => "user_familha" })
        else
-        status 400
-        return body JSON.generate({ :message => "user_type_not_found" })
+        halt 400, JSON.generate({ :message => "user_type_not_found" })
        end
 
         puts db_pass
@@ -46,8 +45,9 @@ module LoginPost
 
         if db_usr == user["email"] && pass_compare == true
             expiration = Time.now.to_i + 3600
-            response.set_cookie("cookie", JWT.encode({ :data => db_id, :exp => expiration }, ENV["ENV_SECRET"], "HS512") )
-            puts session[:id]
+            session[:jwt] = JWT.encode({ :id => db_id, :user_type => usr_type , :ip => request.ip , :exp => expiration }, ENV["ENV_SECRET"], "HS512") 
+
+            puts session[:jwt]
             body JSON.generate({ :recived => :logged_in })     
         else
             halt 401, JSON.generate({ :message => "user or password invalid" }) 

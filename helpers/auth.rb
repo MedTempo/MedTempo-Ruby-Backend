@@ -1,17 +1,26 @@
 require "sinatra"
-require "jwt"
+require "json"
 
 module Sinatra
   module Auth
     def protection!
-       puts "You Shall Not Pass"
+       puts "Protection Helper Begin:"
+
+
+      if session[:jwt].kind_of? String 
+
         begin
-            puts JWT.decode session[:id], ENV["ENV_SECRET"], true, { :algorithm => "HS512" }
-        rescue => exception
-            puts "jwt nil"
-        else
-            
+          jwt = JWT.decode session[:jwt], ENV["ENV_SECRET"], true, { :algorithm => "HS512" }
+  
+          puts jwt
+        rescue JWT::InvalidIssuerError => error
+          puts error
+          halt 401, JSON.generate({ :message => "You Shall Not Pass! Invalid Token" })
         end
+      else
+          halt 400, JSON.generate({ :message => "Invalid Token Format" })
+      end
+
     end
   end
 

@@ -21,8 +21,6 @@
 require "sinatra/base"
 require "./config/cors"
 require "./config/loader"
-require "./config/redis"
-
 
 module ServerConfig
     def self.defaults
@@ -42,8 +40,6 @@ module ServerConfig
         Cors::allow
         Load::router
         Load::helpers
-
-        puts RedisCache::cache.get("hello")
 
     end
 end
