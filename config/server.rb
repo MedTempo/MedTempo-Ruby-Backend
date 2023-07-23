@@ -27,8 +27,10 @@ module ServerConfig
 
         # Sinatra::Application::set :environment, :production
 
+        # Enable sinatra sessions for store data with session[:key]
         Sinatra::Application::set :sessions, true
 
+        # Enable configs acording the actual enviroment
        if Sinatra::Application::production?
         Sinatra::Application::set :logging, false
         Sinatra::Application::set :bind, '0.0.0.0'
@@ -37,6 +39,7 @@ module ServerConfig
        end
 
         Sinatra::Application::set :port, ENV["PORT"]
+        
         Cors::allow
         Load::router
         Load::helpers

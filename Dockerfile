@@ -17,9 +17,19 @@ FROM base as dev
 
 CMD [ "ruby", "trigger.rb" ]
 
+
 FROM base as test
 
 CMD [ "ruby", "./test/trigger-test.rb" ]
 
 
-# Run with: sudo docker build -t medtempo-backend . && sudo docker run -it --env-file .env --network host medtempo-backend
+FROM base as docs
+
+WORKDIR /usr/src/MedTempo-Backend
+
+RUN rdoc 
+
+CMD [ "ruby", "trigger.rb" ]
+
+
+# Run with: sudo docker build -t medtempo-backend --target dev . && sudo docker run -it --name backend-instance --rm --env-file .env --network host medtempo-backend
