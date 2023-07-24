@@ -20,7 +20,8 @@ jobs:
         name: Build Docker Container
         uses: docker/build-push-action@v4
         with: 
-          context: .     
+          context: .  
+          target: test
       - 
         name: Make Testes 
         run: docker images
