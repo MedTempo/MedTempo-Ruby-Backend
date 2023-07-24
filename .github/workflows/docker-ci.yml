@@ -22,7 +22,7 @@ jobs:
         
       - 
         name: Make Testes 
-        run: sudo docker run -it --name backend-instance --rm --network host medtempo-backend
+        run: docker run -it --rm medtempo-backend
         env: 
           DB_ID: ${{ secrets.DB_ID }}
           DB_REGION: ${{ secrets.DB_REGION }} 
