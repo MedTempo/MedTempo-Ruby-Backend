@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v4
         with: 
           context: .  
-          target: test
+          target: dev
       - 
         name: Make Testes 
         run: docker images
