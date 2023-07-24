@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - run: ls -la
+    - run: echo ${{ secrets.DB_ID }}
