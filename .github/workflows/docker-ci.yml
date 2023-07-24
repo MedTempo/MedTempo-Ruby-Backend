@@ -13,6 +13,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: MedTempo Ruby Backend
     - uses: actions/checkout@v3
     - run: docker build -t medtempo-backend --file Dockerfile --target test .
