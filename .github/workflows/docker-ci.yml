@@ -14,5 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - run: echo ${{ secrets.DB_ID }}
+    - run: docker build -t medtempo-backend --file Dockerfile --target test .
+    - run: docker run -it --name backend-instance --rm -e DB_ID=${{ secrets.DB_ID }} -e DB_REGION=${{ secrets.DB_REGION }} -e DB_KEYSPACE=${{ secrets.DB_KEYSPACE }} -e DB_APPLICATION_TOKEN=${{ secrets.DB_APPLICATION_TOKEN }} -e ENV_SECRET=${{ secrets.ENV_SECRET }} -e A2_SECRET=${{ secrets.A2_SECRET }} medtempo-backend
+
