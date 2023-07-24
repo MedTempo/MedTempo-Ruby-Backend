@@ -44,3 +44,4 @@ jobs:
         ENV_SECRET: ${{ secrets.ENV_SECRET }}
         A2_SECRET: ${{ secrets.A2_SECRET }}
       run: ruby test/trigger-test.rb
+      
