@@ -18,17 +18,11 @@ jobs:
         uses: actions/checkout@v3
       - 
         name: Build Docker Container
-        run: docker build -t medtempo-backend --file Dockerfile --target test .
-        
+        uses: docker/build-push-action@v4
+        with: 
+          context: .     
       - 
         name: Make Testes 
-        run: docker run -it --rm medtempo-backend
-        env: 
-          DB_ID: ${{ secrets.DB_ID }}
-          DB_REGION: ${{ secrets.DB_REGION }} 
-          DB_KEYSPACE: ${{ secrets.DB_KEYSPACE }} 
-          DB_APPLICATION_TOKEN: ${{ secrets.DB_APPLICATION_TOKEN }} 
-          ENV_SECRET: ${{ secrets.ENV_SECRET }} 
-          A2_SECRET: ${{ secrets.A2_SECRET }} 
+        run: docker images
           
       
