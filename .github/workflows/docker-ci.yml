@@ -13,5 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - run: docker build -t medtempo-backend --file Dockerfile --target test .
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      - 
+        name: Build Docker Container
+        run: docker build -t medtempo-backend --file Dockerfile --target test .
+        
+      - 
+        name: Teste
+        run: ls -la
