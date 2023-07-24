@@ -35,7 +35,7 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Set Envs
-    - env: 
+      env: 
         PORT: ${{ secrets.PORT }}
         DB_ID: ${{ secrets.DB_ID }}
         DB_REGION: ${{ secrets.DB_REGION }}
