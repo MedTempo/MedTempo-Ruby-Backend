@@ -43,6 +43,4 @@ jobs:
         DB_APPLICATION_TOKEN: ${{ secrets.DB_APPLICATION_TOKEN }}
         ENV_SECRET: ${{ secrets.ENV_SECRET }}
         A2_SECRET: ${{ secrets.A2_SECRET }}
-        
-    - name: Run tests
       run: ruby test/trigger-test.rb
