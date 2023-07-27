@@ -36,7 +36,7 @@ module ServerConfig
         Sinatra::Application::set :logging, false
         Sinatra::Application::set :bind, '0.0.0.0'
        else
-        Sinatra::Application::set :logging, true
+        Sinatra::Application::set :logging, true    
        end
 
         Sinatra::Application::set :port, ENV["PORT"]

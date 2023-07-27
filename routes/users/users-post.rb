@@ -51,11 +51,11 @@ module UsersPost
         req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
             
         if req_email["data"]["usuario_pessoal"]["values"].empty? == false
-            puts req_email
+            logger.info req_email
             return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" })
         end
 
-        puts user
+        logger.info user
         user["id"] = SecureRandom.uuid
             
         if user["sexo"] == "true"
@@ -71,7 +71,7 @@ module UsersPost
 
         res = Db.execute(Db.db_operations["user-pessoal"]["insert"], user, false)
 
-        puts res
+        logger.info res
         body res           
     end end
 end
