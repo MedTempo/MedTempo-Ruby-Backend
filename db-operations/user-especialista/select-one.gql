@@ -1,0 +1,8 @@
+query SelectOneUserEspecialista($user: String){
+  usuario_pessoal(value: { email: $user }){
+    values {
+      id
+      email
+    }
+  }
+}

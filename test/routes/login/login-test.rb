@@ -26,4 +26,15 @@ module TestModule
 
     end
 
-end
+    def test_1_AAAA
+        get "/"
+
+        puts last_response.headers
+
+        puts "cookie bg #{last_response.status}"
+
+        puts last_request.cookies
+
+    end
+
+end 

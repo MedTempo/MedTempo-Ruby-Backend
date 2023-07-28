@@ -42,6 +42,7 @@ module Sinatra
 
         rescue => error
           logger.info error
+          session[:jwt] = nil
           halt 401, JSON.generate({ :message => "You Shall Not Pass! #{error}" })
         end
       else
