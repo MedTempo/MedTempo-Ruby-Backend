@@ -89,5 +89,3 @@ Db = Cassandra.new({
     :keyspace => ENV["DB_KEYSPACE"],
     :token => ENV["DB_APPLICATION_TOKEN"],
 })
-
-

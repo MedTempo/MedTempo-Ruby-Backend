@@ -27,12 +27,15 @@ module DbPrepare
         Dir["./db-operations/*/*.gql"].each_with_index do
             | file, index |
 
-            puts "#{index}) Query - #{file}"
+            puts "#{index}) Query - #{file} [#{File.dirname(file).split('/').last}][#{File.basename(file, '.*')}]"
 
-            queries["#{File.dirname(file).split('/').last}"]["#{File.basename(file, '.*')}"] = File.read(file).gsub(/\s\s +/, ' ')
+            #queries["#{File.dirname(file).split('/').last}"]["#{File.basename(file, '.*')}"] = File.read(file).gsub(/\s\s +/, ' ')
+
+            queries["#{File.dirname(file).split('/').last}"] = queries["#{File.dirname(file).split('/').last}"].merge({ "#{File.basename(file, '.*')}" => File.read(file).gsub(/\s\s +/, ' ') })
         end
 
         puts "\nAll Queries Have Been Loaded!\n"
+
 
         return queries
     end

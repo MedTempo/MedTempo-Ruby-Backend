@@ -46,11 +46,21 @@ module LoginPost
          usr_not_found = true
         end
 
-       db_pass = exists["data"]["usuario_pessoal"]["values"][0]["hash_senha"]
-       db_usr = exists["data"]["usuario_pessoal"]["values"][0]["email"]
-       db_id = exists["data"]["usuario_pessoal"]["values"][0]["id"]
+        db_pass = exists["data"]["usuario_pessoal"]["values"][0]["hash_senha"]
+        db_usr = exists["data"]["usuario_pessoal"]["values"][0]["email"]
+        db_id = exists["data"]["usuario_pessoal"]["values"][0]["id"]
        elsif usr_type == 2
-        return body JSON.generate({ :user => "user_especialista" })
+        exists = JSON.parse(Db.execute(Db.db_operations["user-especialista"]["select-one-with-pass"], { :user => user["email"] } , false))
+
+        logger.info exists["data"]["usuario_especialista"]
+
+        if exists["data"]["usuario_especialista"]["values"].empty? 
+         usr_not_found = true
+        end
+
+        db_pass = exists["data"]["usuario_especialista"]["values"][0]["hash_senha"]
+        db_usr = exists["data"]["usuario_especialista"]["values"][0]["email"]
+        db_id = exists["data"]["usuario_especialista"]["values"][0]["id"]
 
        elsif usr_type == 3
         return body JSON.generate({ :user => "user_familha" })

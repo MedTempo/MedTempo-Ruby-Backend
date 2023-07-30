@@ -1,8 +1,8 @@
 query SelectOneUserPessoal($user: String){
   usuario_pessoal(value: { email: $user }){
     values {
-      id
-      email
+      id,
+      email,
     }
   }
 }

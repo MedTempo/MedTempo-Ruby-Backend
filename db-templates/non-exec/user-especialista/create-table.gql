@@ -21,7 +21,6 @@ mutation createTableUsersPessoal {
       }
       { name: "data_nascimento", type: { basic: DATE } }
       { name: "hash_senha", type: { basic: TEXT } }
-      { name: "descricao", type: { basic: TEXT } }
       { name: "data_criacao", type: { basic: DATE } }
     ]
     ifNotExists: true
