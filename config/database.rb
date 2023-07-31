@@ -79,6 +79,11 @@ class Cassandra
             "X-Cassandra-Token" => @db_app_token
         }
 
+        if res.is_a?(Net::HTTPSuccess) != true
+            puts res.body
+            raise "\u274c Db Error #{res.code}!"
+        end
+
         return res.body
     end
 end

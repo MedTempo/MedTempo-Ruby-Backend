@@ -1,14 +1,14 @@
   mutation InsertUserPessoal(
-    $id: Uuid,
-    $nome: String,
-    $sobrenome: String
-    $sexo: Boolean,
+    $id: Uuid!,
+    $nome: String!,
+    $sobrenome: String!,
+    $sexo: Boolean!,
 
-    $email: String,
-    $senha: String,
-    $data_nascimento: Date,
-    $data_criacao: Date,
-    $descricao: String,
+    $email: String!,
+    $senha: String!,
+    $data_nascimento: Date!,
+    $data_criacao: Date!,
+    $descricao: String!,
 
   ){
     user_pessoal: insertusuario_pessoal(value: {

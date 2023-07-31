@@ -1,0 +1,18 @@
+query GetTables($keyspace: String!){
+  keyspace(name: $keyspace){
+      name
+      tables {
+          name
+          columns {
+              name
+              kind
+              type {
+                  basic
+                  info {
+                      name
+                  }
+              }
+          }
+      }
+  }
+}

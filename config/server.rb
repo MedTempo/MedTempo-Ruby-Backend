@@ -22,31 +22,37 @@ require "sinatra/base"
 require "./config/cors"
 require "./config/loader"
 
+##
 # Sinatra Configurations
 module ServerConfig
     def self.defaults
 
         # Sinatra::Application::set :environment, :production
 
+        ##
         # Enable sinatra sessions for store data with session[:key]
         Sinatra::Application::set :sessions, true
 
+        ##
         # Enable configs acording the actual enviroment
-       if Sinatra::Application::production?
-        Sinatra::Application::set :logging, false
-        Sinatra::Application::set :bind, '0.0.0.0'
-       else
-        Sinatra::Application::set :logging, true    
-       end
+        if Sinatra::Application::production?
+            Sinatra::Application::set :logging, false
+            Sinatra::Application::set :bind, '0.0.0.0'
+        else
+            Sinatra::Application::set :logging, true    
+        end
 
         Sinatra::Application::set :port, ENV["PORT"]
         
-        # Set Cors Configs
+        ##
+        # Set Cors Headers
         Cors::allow
 
+        ##
         # Load Controllers
         Load::router
 
+        ##
         # Load Helpers
         Load::helpers
 

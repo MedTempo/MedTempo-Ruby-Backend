@@ -1,4 +1,4 @@
-mutation InsertUserEspecialista(
+mutation InsertUserFamilhar(
   $id: Uuid!,
   $nome: String!,
   $sobrenome: String!,
@@ -9,11 +9,10 @@ mutation InsertUserEspecialista(
   $data_nascimento: Date!,
   $data_criacao: Date!,
   
-  $crm: String!,
   $local_trabalho: String!,
 
 ){
-  user_especialista: insertusuario_especialista(value: {
+  user_familhar: insertusuario_familhar(value: {
     id: $id,
     nome: $nome,
     sobrenome: $sobrenome,
@@ -25,7 +24,6 @@ mutation InsertUserEspecialista(
     data_nascimento: $data_nascimento,
     data_criacao: $data_criacao,
 
-    crm: $crm
     local_trabalho: $local_trabalho
     
   }){

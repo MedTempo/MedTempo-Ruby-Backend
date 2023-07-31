@@ -23,6 +23,7 @@
 require "sinatra"
 require "./config/server"
 
+##
 # Import sinatra settings
 
 ServerConfig::defaults

@@ -1,4 +1,4 @@
-query SelectOneUserEspecialista($user: String){
+query SelectOneUserEspecialista($user: String!){
   usuario_especialista(value: { email: $user }){
     values {
       id,

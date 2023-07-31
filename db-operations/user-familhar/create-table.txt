@@ -1,7 +1,7 @@
-mutation createTableUsersPessoal {
-  usuario_especialista: createTable(
+mutation createTableUsersFamilhar {
+  usuario_familhar: createTable(
     keyspaceName: "medtempo"
-    tableName: "usuario_especialista"
+    tableName: "usuario_familhar"
     partitionKeys: [
       { name: "id", type: { basic: UUID } }
       { name: "email", type: { basic: TEXT } }
@@ -13,7 +13,7 @@ mutation createTableUsersPessoal {
         name: "sexo"
         type: { basic: BOOLEAN } # True - Feminino, False - Masculino
       }
-      { name: "crm", type: { basic: TEXT } }
+      { name: "parentesco", type: { basic: TEXT } }
       { name: "local_trabalho", type: { basic: TEXT } }
       { name: "data_nascimento", type: { basic: DATE } }
       { name: "hash_senha", type: { basic: TEXT } }
@@ -30,25 +30,19 @@ mutation createTableUsersPessoal {
   )
   index_data_nascimento: createIndex(
     keyspaceName: "medtempo"
-    tableName: "usuario_especialista"
+    tableName: "usuario_familhar"
     columnName: "data_nascimento"
     ifNotExists: true
   )
   index_sexo: createIndex(
     keyspaceName: "medtempo"
-    tableName: "usuario_especialista"
+    tableName: "usuario_familhar"
     columnName: "sexo"
-    ifNotExists: true
-  )
-  index_crm: createIndex(
-    keyspaceName: "medtempo"
-    tableName: "usuario_especialista"
-    columnName: "crm"
     ifNotExists: true
   )
   index_email: createIndex(
     keyspaceName: "medtempo"
-    tableName: "usuario_especialista"
+    tableName: "usuario_familhar"
     columnName: "email"
     ifNotExists: true
   )

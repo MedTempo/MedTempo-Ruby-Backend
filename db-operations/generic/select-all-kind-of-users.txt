@@ -1,0 +1,42 @@
+query SelectAllUser {
+  user_pessoal: usuario_pessoal {
+    values{
+      id
+      data_criacao
+      data_nascimento
+      email
+      hash_senha
+      nome
+      sexo
+      sobrenome
+      descricao
+    }
+  }
+  
+  user_especialista: usuario_especialista {
+    values {
+      id
+      data_criacao
+      data_nascimento
+      email
+      hash_senha
+      nome
+      sexo
+      sobrenome
+      crm
+    }
+  }
+  
+  user_familhar: usuario_familhar {
+    values {
+      id
+      data_criacao
+      data_nascimento
+      email
+      hash_senha
+      nome
+      sexo
+      sobrenome
+    }
+  }
+}

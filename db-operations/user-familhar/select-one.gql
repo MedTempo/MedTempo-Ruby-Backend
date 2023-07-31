@@ -1,0 +1,8 @@
+query SelectOneUserFamilhar($user: String!){
+  usuario_familhar(value: { email: $user }){
+    values {
+      id,
+      email,
+    }
+  }
+}

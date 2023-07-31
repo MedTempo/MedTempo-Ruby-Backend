@@ -19,18 +19,11 @@
 =end
 
 require "sinatra"
-require "./config/database"
+require "json"
 
-module UsersGet
-    ["/user-pessoal"].each do | path | Sinatra::Application::get path do
-        protection!
-        res = Db.execute(Db.db_operations["user-pessoal"]["select"])
-        body res           
-    end end
 
-    ["/user-especialista"].each do | path | Sinatra::Application::get path do
-        protection!
-        res = Db.execute(Db.db_operations["user-especialista"]["select"])
-        body res           
-    end end
+module Sinatra
+    Sinatra::Application::not_found do 
+        halt 404, JSON.generate({ :message => "Route #{request.fullpath} Not Found" })
+    end
 end
