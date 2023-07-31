@@ -7,7 +7,6 @@ query SelectAllUserPessoal {
       descricao
       email
       hash_senha
-      idade
       nome
       sexo
       sobrenome

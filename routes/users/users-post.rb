@@ -83,10 +83,6 @@ module UsersPost
         
         logger.info req_email
 
-        puts "\n\n\nspec"
-
-        puts Db.db_operations
-
         if req_email["data"]["usuario_especialista"]["values"].empty? == false
             logger.info req_email
             return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" })
@@ -108,7 +104,7 @@ module UsersPost
 
         res = Db.execute(Db.db_operations["user-especialista"]["insert"], user, false)
 
-        puts res
+        logger.info res
         body res           
     end end
 end

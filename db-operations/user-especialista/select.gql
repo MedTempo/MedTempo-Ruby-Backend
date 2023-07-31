@@ -1,1 +1,14 @@
-user especialista select
+query SelectAllUserEspecialista {
+  usuario_especialista {
+    values {
+      id
+      data_criacao
+      data_nascimento
+      email
+      hash_senha
+      nome
+      sexo
+      sobrenome
+    }
+  }
+}

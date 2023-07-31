@@ -1,0 +1,3 @@
+mutation DropAnyTable($table: String!){
+  drop: dropTable(keyspaceName:"medtempo", tableName: $table)
+}

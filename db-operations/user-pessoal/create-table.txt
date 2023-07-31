@@ -26,10 +26,6 @@ mutation createTableUsersPessoal {
         type: { basic: BOOLEAN } # True - Feminino, False - Masculino
       },
       {
-        name: "idade",
-        type: { basic: TINYINT } # Valor máximo de 127 anos 
-      },
-      {
         name: "data_nascimento", 
         type: { basic: DATE }
       },
@@ -50,9 +46,9 @@ mutation createTableUsersPessoal {
   )
   
   
-  idex_nome: createIndex(keyspaceName: "medtempo", tableName: "usuario_pessoal", columnName: "nome", ifNotExists: true),
+  index_nome: createIndex(keyspaceName: "medtempo", tableName: "usuario_pessoal", columnName: "nome", ifNotExists: true),
+  index_data_nascimento: createIndex(keyspaceName: "medtempo", tableName: "usuario_pessoal", columnName: "data_nascimento", ifNotExists: true)
   index_sexo: createIndex(keyspaceName: "medtempo", tableName: "usuario_pessoal", columnName: "sexo", ifNotExists: true),
-  index_idade: createIndex(keyspaceName: "medtempo", tableName: "usuario_pessoal", columnName: "idade", ifNotExists: true),
   index_email: createIndex(keyspaceName: "medtempo", tableName: "usuario_pessoal", columnName: "email", ifNotExists: true)
 }
 

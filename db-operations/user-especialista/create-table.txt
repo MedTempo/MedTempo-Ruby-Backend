@@ -15,10 +15,6 @@ mutation createTableUsersPessoal {
       }
       { name: "crm", type: { basic: TEXT } }
       { name: "local_trabalho", type: { basic: TEXT } }
-      {
-        name: "idade"
-        type: { basic: TINYINT } # Valor máximo de 127 anos
-      }
       { name: "data_nascimento", type: { basic: DATE } }
       { name: "hash_senha", type: { basic: TEXT } }
       { name: "data_criacao", type: { basic: DATE } }
@@ -32,22 +28,22 @@ mutation createTableUsersPessoal {
     columnName: "nome"
     ifNotExists: true
   )
+  index_data_nascimento: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "usuario_especialista"
+    columnName: "data_nascimento"
+    ifNotExists: true
+  )
   index_sexo: createIndex(
     keyspaceName: "medtempo"
     tableName: "usuario_especialista"
     columnName: "sexo"
     ifNotExists: true
   )
-  index_idade: createIndex(
-    keyspaceName: "medtempo"
-    tableName: "usuario_especialista"
-    columnName: "idade"
-    ifNotExists: true
-  )
   index_crm: createIndex(
     keyspaceName: "medtempo"
     tableName: "usuario_especialista"
-    columnName: "idade"
+    columnName: "crm"
     ifNotExists: true
   )
   index_email: createIndex(

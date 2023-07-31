@@ -6,7 +6,6 @@
 
     $email: String,
     $senha: String,
-    $idade: TinyInt,
     $data_nascimento: Date,
     $data_criacao: Date,
     $descricao: String,
@@ -20,8 +19,7 @@
 
       email: $email,
       hash_senha: $senha,
-      
-      idade: $idade,
+        
       data_nascimento: $data_nascimento,
       data_criacao: $data_criacao,
 

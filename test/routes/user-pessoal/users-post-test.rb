@@ -7,8 +7,7 @@ module TestModule
     
         mock_usr = {
             "nome"=>"oi",
-            "sobrenome"=>"ooi",\
-            "idade"=>23, 
+            "sobrenome"=>"ooi",
             "sexo"=>"true", 
             "email"=> @@mock_email,
             "senha"=> @@mock_pass, 
