@@ -24,7 +24,7 @@ module Cors
         Sinatra::Application::before do 
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Methods"] = methods
-            response.headers["Access-Control-Allow-Credentials"] = credentials
+            response.headers["Access-Control-Allow-Credentials"] = cre
          
            content_type "application/json"
 
