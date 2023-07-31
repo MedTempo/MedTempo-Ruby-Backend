@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one.gql - RDoc Documentation</title>
+<title>select-all-tables - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -91,16 +91,27 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-pessoal/select-one.gql">
+<main role="main" aria-label="Page db-operations/generic/select-all-tables">
 
-<p>query SelectOneUserPessoal($user: String!){</p>
+<p>query GetTables($keyspace: String!){</p>
 
-<pre>usuario_pessoal(value: { email: $user }){
-  values {
-    id,
-    email,
-  }
-}</pre>
+<pre class="ruby"><span class="ruby-identifier">keyspace</span>(<span class="ruby-value">name:</span> <span class="ruby-identifier">$keyspace</span>){
+    <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">tables</span> {
+        <span class="ruby-identifier">name</span>
+        <span class="ruby-identifier">columns</span> {
+            <span class="ruby-identifier">name</span>
+            <span class="ruby-identifier">kind</span>
+            <span class="ruby-identifier">type</span> {
+                <span class="ruby-identifier">basic</span>
+                <span class="ruby-identifier">info</span> {
+                    <span class="ruby-identifier">name</span>
+                }
+            }
+        }
+    }
+}
+</pre>
 
 <p>}</p>
 

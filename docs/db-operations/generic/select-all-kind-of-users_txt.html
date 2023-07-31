@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one.gql - RDoc Documentation</title>
+<title>select-all-kind-of-users - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -91,14 +91,48 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-pessoal/select-one.gql">
+<main role="main" aria-label="Page db-operations/generic/select-all-kind-of-users.txt">
 
-<p>query SelectOneUserPessoal($user: String!){</p>
+<p>query SelectAllUser {</p>
 
-<pre>usuario_pessoal(value: { email: $user }){
+<pre>user_pessoal: usuario_pessoal {
+  values{
+    id
+    data_criacao
+    data_nascimento
+    email
+    hash_senha
+    nome
+    sexo
+    sobrenome
+    descricao
+  }
+}
+
+user_especialista: usuario_especialista {
   values {
-    id,
-    email,
+    id
+    data_criacao
+    data_nascimento
+    email
+    hash_senha
+    nome
+    sexo
+    sobrenome
+    crm
+  }
+}
+
+user_familhar: usuario_familhar {
+  values {
+    id
+    data_criacao
+    data_nascimento
+    email
+    hash_senha
+    nome
+    sexo
+    sobrenome
   }
 }</pre>
 

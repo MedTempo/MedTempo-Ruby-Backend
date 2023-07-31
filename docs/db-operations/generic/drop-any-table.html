@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one.gql - RDoc Documentation</title>
+<title>drop-any-table - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -91,16 +91,11 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-pessoal/select-one.gql">
+<main role="main" aria-label="Page db-operations/generic/drop-any-table">
 
-<p>query SelectOneUserPessoal($user: String!){</p>
+<p>mutation DropAnyTable($table: String!){</p>
 
-<pre>usuario_pessoal(value: { email: $user }){
-  values {
-    id,
-    email,
-  }
-}</pre>
+<pre>drop: dropTable(keyspaceName:&quot;medtempo&quot;, tableName: $table)</pre>
 
 <p>}</p>
 

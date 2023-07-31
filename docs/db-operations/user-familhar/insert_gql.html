@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one.gql - RDoc Documentation</title>
+<title>insert.gql - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -91,14 +91,43 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-pessoal/select-one.gql">
+<main role="main" aria-label="Page db-operations/user-familhar/insert.gql">
 
-<p>query SelectOneUserPessoal($user: String!){</p>
+<p>mutation InsertUserFamilhar(</p>
 
-<pre>usuario_pessoal(value: { email: $user }){
-  values {
+<pre>$id: Uuid!,
+$nome: String!,
+$sobrenome: String!,
+$sexo: Boolean!,
+
+$email: String!,
+$senha: String!,
+$data_nascimento: Date!,
+$data_criacao: Date!,
+
+$local_trabalho: String!,</pre>
+
+<p>){</p>
+
+<pre>user_familhar: insertusuario_familhar(value: {
+  id: $id,
+  nome: $nome,
+  sobrenome: $sobrenome,
+  sexo: $sexo,
+
+  email: $email,
+  hash_senha: $senha,
+
+  data_nascimento: $data_nascimento,
+  data_criacao: $data_criacao,
+
+  local_trabalho: $local_trabalho
+
+}){
+  value{
     id,
-    email,
+    nome,
+    sobrenome
   }
 }</pre>
 

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one.gql - RDoc Documentation</title>
+<title>create-table - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -91,16 +91,60 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-pessoal/select-one.gql">
+<main role="main" aria-label="Page db-operations/user-pessoal/create-table.txt">
 
-<p>query SelectOneUserPessoal($user: String!){</p>
+<p>mutation createTableUsersPessoal {</p>
 
-<pre>usuario_pessoal(value: { email: $user }){
-  values {
-    id,
-    email,
-  }
-}</pre>
+<pre>usuario_pessoal: createTable(
+  keyspaceName: &quot;medtempo&quot;
+  tableName: &quot;usuario_pessoal&quot;,
+      partitionKeys:[
+     {
+      name: &quot;id&quot;,
+      type: { basic: UUID }
+    },
+    {
+      name: &quot;email&quot;,
+      type:{ basic: TEXT }
+    },
+  ]
+  values:[
+      {
+      name: &quot;nome&quot;,
+      type: { basic: TEXT }
+    },
+    {
+      name: &quot;sobrenome&quot;,
+      type: { basic: TEXT }
+    },
+    {
+      name: &quot;sexo&quot;,
+      type: { basic: BOOLEAN } # True - Feminino, False - Masculino
+    },
+    {
+      name: &quot;data_nascimento&quot;, 
+      type: { basic: DATE }
+    },
+    {
+      name: &quot;hash_senha&quot;,
+      type: { basic: TEXT }
+    },
+    {
+      name: &quot;descricao&quot;,
+      type: { basic: TEXT }
+    },
+    {
+      name: &quot;data_criacao&quot;,
+      type: { basic: DATE }
+    }
+  ],
+  ifNotExists: true
+)
+
+index_nome: createIndex(keyspaceName: &quot;medtempo&quot;, tableName: &quot;usuario_pessoal&quot;, columnName: &quot;nome&quot;, ifNotExists: true),
+index_data_nascimento: createIndex(keyspaceName: &quot;medtempo&quot;, tableName: &quot;usuario_pessoal&quot;, columnName: &quot;data_nascimento&quot;, ifNotExists: true)
+index_sexo: createIndex(keyspaceName: &quot;medtempo&quot;, tableName: &quot;usuario_pessoal&quot;, columnName: &quot;sexo&quot;, ifNotExists: true),
+index_email: createIndex(keyspaceName: &quot;medtempo&quot;, tableName: &quot;usuario_pessoal&quot;, columnName: &quot;email&quot;, ifNotExists: true)</pre>
 
 <p>}</p>
 
