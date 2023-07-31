@@ -1,5 +1,5 @@
 source "https://rubygems.org" # Package Repository
-ruby "~> 3.2.3"
+ruby "~> 3.2.2"
 
 gem "sinatra" # Web Framework
 
