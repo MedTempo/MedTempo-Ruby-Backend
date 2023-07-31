@@ -46,7 +46,7 @@ module ServerConfig
         
         ##
         # Set Cors Headers
-        Cors::allow
+        Cors::allow "http://localhost:4200, ionic://localhost"
 
         ##
         # Load Controllers

@@ -20,10 +20,11 @@
 
 # Configure Cors Headers
 module Cors
-    def self.allow(origin = "*", methods = "POST, GET, PATCH, DELETE, OPTIONS") 
+    def self.allow(origin = "*", methods = "POST, GET, PATCH, DELETE, OPTIONS", credentials = "true") 
         Sinatra::Application::before do 
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Methods"] = methods
+            response.headers["Access-Control-Allow-Credentials"] = credentials
          
            content_type "application/json"
 
