@@ -54,7 +54,7 @@ module UsersPost
         res = Db.execute(Db.db_operations["user-pessoal"]["insert"], user, false)
 
         logger.info res
-        body "ok"           
+        body JSON.generate({ :message => "ok" })           
     end end
 
     ["/user-especialista"].each do | path | Sinatra::Application::post path do
@@ -87,7 +87,7 @@ module UsersPost
         res = Db.execute(Db.db_operations["user-especialista"]["insert"], user, false)
 
         logger.info res
-        body "ok"           
+        body JSON.generate({ :message => "ok" })           
     end end
 
     ["/user-familhar"].each do | path | Sinatra::Application::post path do
@@ -120,6 +120,6 @@ module UsersPost
         res = Db.execute(Db.db_operations["user-familhar"]["insert"], user, false)
 
         logger.info res
-        body "ok"           
+        body JSON.generate({ :message => "ok" })           
     end end
 end

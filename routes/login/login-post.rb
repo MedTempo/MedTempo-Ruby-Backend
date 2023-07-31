@@ -38,37 +38,28 @@ module LoginPost
         usr_type = user["user_type"].to_i
 
        if usr_type  == 1
-        exists = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one-with-pass"], { :user => user["email"] } , false))
-
-        logger.info exists["data"]["usuario_pessoal"]
-
-        if exists["data"]["usuario_pessoal"]["values"].empty? 
-         usr_not_found = true
-        else
-         db_pass = exists["data"]["usuario_pessoal"]["values"][0]["hash_senha"]
-         db_usr = exists["data"]["usuario_pessoal"]["values"][0]["email"]
-         db_id = exists["data"]["usuario_pessoal"]["values"][0]["id"]
-        end
+        table_name = "usuario_pessoal"
+        query_name = "user-pessoal"
        elsif usr_type == 2
-        exists = JSON.parse(Db.execute(Db.db_operations["user-especialista"]["select-one-with-pass"], { :user => user["email"] } , false))
-
-        logger.info exists["data"]["usuario_especialista"]
-
-        if exists["data"]["usuario_especialista"]["values"].empty? 
-         usr_not_found = true
-        else
-         db_pass = exists["data"]["usuario_especialista"]["values"][0]["hash_senha"]
-         db_usr = exists["data"]["usuario_especialista"]["values"][0]["email"]
-         db_id = exists["data"]["usuario_especialista"]["values"][0]["id"]
-        end    
+        table_name = "usuario_especialista"
+        query_name = "user-especialista"
        elsif usr_type == 3
-        return body JSON.generate({ :user => "user_familha" })
+        table_name = "usuario_familhar"
+        query_name = "user-familhar"
        else
         halt 400, JSON.generate({ :message => "user_type_not_found" })
        end
 
-       if usr_not_found == true
+       exists = JSON.parse(Db.execute(Db.db_operations[query_name]["select-one-with-pass"], { :user => user["email"] } , false))
+
+       logger.info exists["data"][table_name]
+
+       if exists["data"][table_name]["values"].empty? 
         return halt 409, JSON.generate({ :message => "User Not Found" })
+       else
+        db_pass = exists["data"][table_name]["values"][0]["hash_senha"]
+        db_usr = exists["data"][table_name]["values"][0]["email"]
+        db_id = exists["data"][table_name]["values"][0]["id"]
        end
 
         logger.info db_pass
