@@ -44,13 +44,13 @@ class Cassandra
         @db_uri = "#{@uri_struct}/#{@db_keyspace}";
         @db_uri_schema = "#{@uri_struct}-schema"
 
-        self.show
+        #self.show
         #self.is_filled
     end
 
     private def show 
         if Sinatra::Application::production?
-            puts "It's not allowed to read the env variables in production"
+            raise "It's not allowed to read the env variables in production"
         else
             puts "\n"
             puts "Region: #{@db_region}\nId: #{@db_id}\nKeyspace: #{@db_keyspace}\nToken: #{@db_app_token}\nDb base uri: #{@uri_struct}\nDb uri: #{@db_uri}\nDb schema uri: #{@db_uri_schema}"       
