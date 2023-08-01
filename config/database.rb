@@ -44,7 +44,7 @@ class Cassandra
         @db_uri = "#{@uri_struct}/#{@db_keyspace}";
         @db_uri_schema = "#{@uri_struct}-schema"
 
-        #self.show
+        self.show
         #self.is_filled
     end
 

@@ -46,7 +46,7 @@ module ServerConfig
         
         ##
         # Set Cors Headers
-        Cors::allow "https://med-tempo.vercel.app"
+        Cors::allow [ "https://med-tempo.vercel.app", "http://localhost:4200", "capacitor://localhost", "ionic://localhost"]
 
         ##
         # Load Controllers
