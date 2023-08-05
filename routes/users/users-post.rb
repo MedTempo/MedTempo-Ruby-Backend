@@ -29,7 +29,7 @@ module UsersPost
     ["/user-pessoal", "/usuarios"].each do | path | Sinatra::Application::post path do
         
         user = JSON.parse(request.body.read)
-        verify! user, ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "descricao" ]
+        verify! user,  ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "descricao" ]
 
         req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
         
