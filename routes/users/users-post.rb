@@ -29,7 +29,7 @@ module UsersPost
     ["/user-pessoal", "/usuarios"].each do | path | Sinatra::Application::post path do
         
         user = JSON.parse(request.body.read)
-        verify! user, { :hello => "world" }
+        verify! user, ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "descricao" ]
 
         req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
         
@@ -54,6 +54,8 @@ module UsersPost
         user["data_criacao"] = Time.now.strftime("%Y-%m-%d")
         
         res = Db.execute(Db.db_operations["user-pessoal"]["insert"], user, false)
+
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 1 })
 
         logger.info res
         body JSON.generate({ :message => "ok" })           
@@ -87,6 +89,7 @@ module UsersPost
         
 
         res = Db.execute(Db.db_operations["user-especialista"]["insert"], user, false)
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 2 })
 
         logger.info res
         body JSON.generate({ :message => "ok" })           
@@ -120,6 +123,7 @@ module UsersPost
         
 
         res = Db.execute(Db.db_operations["user-familhar"]["insert"], user, false)
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 3 })   
 
         logger.info res
         body JSON.generate({ :message => "ok" })           

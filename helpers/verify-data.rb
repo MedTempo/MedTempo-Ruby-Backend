@@ -26,6 +26,10 @@ module Sinatra
   module VerifyData
     def verify!(data = {}, required)
         puts "Data: #{data}\n Required: #{required}"
+
+        puts data.keys
+
+        puts "Intersection: #{(data.keys & required).any?}"
     end
   end
 
