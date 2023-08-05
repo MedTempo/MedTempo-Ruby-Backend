@@ -18,37 +18,25 @@
     
 =end
 
-require "sinatra"
 
-module Load
+require "bunny"
+require "json"
 
-    # Load Controllers 
-    def self.router
+puts "Bunny: #{ENV["RMQ_HOST"]}"
 
-        Dir["./routes/*/*.rb"].each_with_index do
-            | file, index |
+puts "Starting Bunny (Rabbitmq driver) ..."
 
-            require file
+Rabbitmq = Hash.new
 
-            puts "#{index}) Controller - #{file}"
-        end
+Rabbitmq[:connection] = Bunny.new hostname: ENV["RMQ_HOST"], port: ENV["RMQ_PORT"].to_i, virtual_host: ENV["RMQ_VHOST"], username: ENV["RMQ_USR"], password: ENV["RMQ_PASS"]
+Rabbitmq[:instance] = Rabbitmq[:connection].start               
+Rabbitmq[:channel] = Rabbitmq[:instance].create_channel
 
-        puts "\nAll Controllers Have Been Loaded!\n\n"
-    end
+Rabbitmq[:queues] = {
+    :emails => Rabbitmq[:channel].queue("emails")
+}
 
-    # Load Helpers
-    def self.helpers
+puts "Rabbitmq connection established"
 
-        Dir["./helpers/*.rb"].each_with_index do
-            | file, index |
 
-            require file
-
-            include Sinatra
-
-            puts "#{index}) Helpers - #{file}"
-        end
-
-        puts "\nAll Helpers Have Been Loaded!\n\n"
-    end
-end
+#Rabbitmq[:queues][:queue].publish("My Queue is Working", persistent: true)

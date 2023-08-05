@@ -21,6 +21,7 @@
 require "sinatra/base"
 require "./config/cors"
 require "./config/loader"
+require "./config/worker-queue"
 
 ##
 # Sinatra Configurations
@@ -35,18 +36,21 @@ module ServerConfig
 
         ##
         # Enable configs acording the actual enviroment
-        if Sinatra::Application::production?
+
+        Sinatra::Application::configure :production do
             Sinatra::Application::set :logging, false
             Sinatra::Application::set :bind, '0.0.0.0'
-        else
-            Sinatra::Application::set :logging, true    
         end
+
+        Sinatra::Application::configure :development do
+            Sinatra::Application::set :logging, true
+        end  
 
         Sinatra::Application::set :port, ENV["PORT"]
         
         ##
         # Set Cors Headers
-        Cors::allow [ "https://med-tempo.vercel.app", "http://localhost:4200", "capacitor://localhost", "ionic://localhost"]
+        Cors::allow [ "https://med-tempo.vercel.app", "http://localhost:4200", "capacitor://localhost", "ionic://localhost" ]
 
         ##
         # Load Controllers

@@ -19,36 +19,15 @@
 =end
 
 require "sinatra"
+require "json"
 
-module Load
-
-    # Load Controllers 
-    def self.router
-
-        Dir["./routes/*/*.rb"].each_with_index do
-            | file, index |
-
-            require file
-
-            puts "#{index}) Controller - #{file}"
-        end
-
-        puts "\nAll Controllers Have Been Loaded!\n\n"
+# Checks if user is authenticated, if not send a error back to client
+module Sinatra
+  module VerifyData
+    def verify!(data = {}, required)
+        puts "Data: #{data}\n Required: #{required}"
     end
+  end
 
-    # Load Helpers
-    def self.helpers
-
-        Dir["./helpers/*.rb"].each_with_index do
-            | file, index |
-
-            require file
-
-            include Sinatra
-
-            puts "#{index}) Helpers - #{file}"
-        end
-
-        puts "\nAll Helpers Have Been Loaded!\n\n"
-    end
+  helpers VerifyData
 end

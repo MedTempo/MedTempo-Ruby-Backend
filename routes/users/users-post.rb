@@ -29,9 +29,12 @@ module UsersPost
     ["/user-pessoal", "/usuarios"].each do | path | Sinatra::Application::post path do
         
         user = JSON.parse(request.body.read)
+        verify! user, { :hello => "world" }
 
         req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
-            
+        
+        puts req_email
+
         if req_email["data"]["usuario_pessoal"]["values"].empty? == false
             logger.info req_email
             return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" })
@@ -50,7 +53,6 @@ module UsersPost
         user["senha"] = argon2.create(user["senha"])
         user["data_criacao"] = Time.now.strftime("%Y-%m-%d")
         
-
         res = Db.execute(Db.db_operations["user-pessoal"]["insert"], user, false)
 
         logger.info res

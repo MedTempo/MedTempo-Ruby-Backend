@@ -2,7 +2,7 @@ require "test/unit"
 require "rack/test"
 
 module TestModule
-    def test_1_UserPessoalPost
+    def test_1_UserFamilharPost
 
     
         mock_usr = {
@@ -12,19 +12,20 @@ module TestModule
             "email"=> @@mock_email,
             "senha"=> @@mock_pass, 
             "data_nascimento"=>"2023-08-04", 
-            "descricao"=>"ddd"
+            "parentesco": "teste parentesco",
+            "local_trabalho": "Trabalho Legal",            
         }
-        
+
 
         puts mock_usr
 
-        post "/user-pessoal", JSON.generate(mock_usr), { "Content Type" => "application/json" }
+        post "/user-familhar", JSON.generate(mock_usr), { "Content Type" => "application/json" }
 
         puts JSON.generate(last_response.body)
     
         assert last_response.ok?
-    
+
         puts "\n\n\n\n"
-        
+    
     end
 end

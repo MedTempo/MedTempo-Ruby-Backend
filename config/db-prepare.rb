@@ -36,6 +36,7 @@ module DbPrepare
 
         puts "\nAll Queries Have Been Loaded!\n"
 
+        puts "\n\n\n#{queries}\n\n\n"
 
         return queries
     end

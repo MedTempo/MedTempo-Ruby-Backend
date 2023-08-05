@@ -13,7 +13,7 @@ mutation createTableUsersFamilhar {
         name: "sexo"
         type: { basic: BOOLEAN } # True - Feminino, False - Masculino
       }
-      { name: "parentesco", type: { basic: TEXT } }
+      { name: "parentesco", type: { basic: TEXT } }   # Esse campo talvez mude
       { name: "local_trabalho", type: { basic: TEXT } }
       { name: "data_nascimento", type: { basic: DATE } }
       { name: "hash_senha", type: { basic: TEXT } }

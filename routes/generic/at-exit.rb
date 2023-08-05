@@ -19,36 +19,12 @@
 =end
 
 require "sinatra"
+require "json"
 
-module Load
 
-    # Load Controllers 
-    def self.router
-
-        Dir["./routes/*/*.rb"].each_with_index do
-            | file, index |
-
-            require file
-
-            puts "#{index}) Controller - #{file}"
-        end
-
-        puts "\nAll Controllers Have Been Loaded!\n\n"
-    end
-
-    # Load Helpers
-    def self.helpers
-
-        Dir["./helpers/*.rb"].each_with_index do
-            | file, index |
-
-            require file
-
-            include Sinatra
-
-            puts "#{index}) Helpers - #{file}"
-        end
-
-        puts "\nAll Helpers Have Been Loaded!\n\n"
+module Sinatra
+    at_exit do 
+        Rabbitmq[:connection].close
+        puts "Closed Rabbitmq connection"
     end
 end

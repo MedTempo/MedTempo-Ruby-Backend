@@ -47,20 +47,23 @@ module LoginPost
         table_name = "usuario_familhar"
         query_name = "user-familhar"
        else
-        halt 400, JSON.generate({ :message => "user_type_not_found" })
+        halt 400, JSON.generate({ :message => "User Type Not Found" })
        end
 
        exists = JSON.parse(Db.execute(Db.db_operations[query_name]["select-one-with-pass"], { :user => user["email"] } , false))
+
+       puts exists
 
        logger.info exists["data"][table_name]
 
        if exists["data"][table_name]["values"].empty? 
         return halt 409, JSON.generate({ :message => "User Not Found" })
-       else
+       end
+
         db_pass = exists["data"][table_name]["values"][0]["hash_senha"]
         db_usr = exists["data"][table_name]["values"][0]["email"]
         db_id = exists["data"][table_name]["values"][0]["id"]
-       end
+       
 
         logger.info db_pass
         logger.info user["senha"] 
