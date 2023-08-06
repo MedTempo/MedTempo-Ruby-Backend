@@ -64,6 +64,7 @@ module UsersPost
     ["/user-especialista"].each do | path | Sinatra::Application::post path do
         
         user = JSON.parse(request.body.read)
+        verify! user, ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "crm", "local_trabalho"]
 
         req_email = JSON.parse(Db.execute(Db.db_operations["user-especialista"]["select-one"], { :user => user["email"] }, false))
         
@@ -98,6 +99,8 @@ module UsersPost
     ["/user-familhar"].each do | path | Sinatra::Application::post path do
         
         user = JSON.parse(request.body.read)
+
+        verify! user, [ "nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "local_trabalho" ]
 
         req_email = JSON.parse(Db.execute(Db.db_operations["user-familhar"]["select-one"], { :user => user["email"] }, false))
 

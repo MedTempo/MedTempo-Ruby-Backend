@@ -29,7 +29,11 @@ module Sinatra
 
         puts data.keys
 
-        puts "Intersection: #{(data.keys & required).any?}"
+        puts "Intersection: #{}"
+
+        if (data.keys & required).any? == false
+            return halt 400, JSON.generate({ :message => "Invalid Filds" })
+        end
     end
   end
 
