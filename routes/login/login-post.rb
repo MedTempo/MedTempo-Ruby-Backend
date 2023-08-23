@@ -44,8 +44,8 @@ module LoginPost
         table_name = "usuario_especialista"
         query_name = "user-especialista"
        elsif usr_type == 3
-        table_name = "usuario_familhar"
-        query_name = "user-familhar"
+        table_name = "usuario_familiar"
+        query_name = "user-familiar"
        else
         halt 400, JSON.generate({ :message => "User Type Not Found" })
        end

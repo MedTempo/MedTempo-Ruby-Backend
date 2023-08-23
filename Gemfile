@@ -12,5 +12,5 @@ gem "jwt" # Json Web Token for Security
 
 gem "bunny" # Rabbitmq server
 
-#gem "redis" # Cache Database
+# gem "redis" # Cache Database
 

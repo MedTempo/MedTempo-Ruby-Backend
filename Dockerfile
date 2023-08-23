@@ -4,6 +4,7 @@ WORKDIR /usr/src/MedTempo-Backend
 
 
 COPY ./Gemfile ./Gemfile
+COPY ./Gemfile.lock ./Gemfile.lock
 
 RUN bundle install 
 

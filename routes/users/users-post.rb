@@ -96,17 +96,17 @@ module UsersPost
         body JSON.generate({ :message => "ok" })           
     end end
 
-    ["/user-familhar"].each do | path | Sinatra::Application::post path do
+    ["/user-familiar"].each do | path | Sinatra::Application::post path do
         
         user = JSON.parse(request.body.read)
 
         verify! user, [ "nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "local_trabalho" ]
 
-        req_email = JSON.parse(Db.execute(Db.db_operations["user-familhar"]["select-one"], { :user => user["email"] }, false))
+        req_email = JSON.parse(Db.execute(Db.db_operations["user-familiar"]["select-one"], { :user => user["email"] }, false))
 
         puts req_email
             
-        if req_email["data"]["usuario_familhar"]["values"].empty? == false
+        if req_email["data"]["usuario_familiar"]["values"].empty? == false
             logger.info req_email
             return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" })
         end
@@ -125,7 +125,7 @@ module UsersPost
         user["data_criacao"] = Time.now.strftime("%Y-%m-%d")
         
 
-        res = Db.execute(Db.db_operations["user-familhar"]["insert"], user, false)
+        res = Db.execute(Db.db_operations["user-familiar"]["insert"], user, false)
         Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 3 })   
 
         logger.info res

@@ -1,0 +1,26 @@
+mutation createMedicamentos {
+  medicamentos: createTable(
+    keyspaceName: "medtempo"
+    tableName: "medicamentos"
+    partitionKeys: [
+      { name: "id", type: { basic: UUID } }
+      { name: "medico", type: { basic: UUID } }
+      { name: "usuario_pessoal", type: { basic: UUID } }
+    ]
+    values: [
+      { name: "nome", type: { basic: TEXT } }
+      { name: "descricao", type: { basic: TEXT } }
+      { name: "intervalo_uso", type: { basic: TEXT }}
+      { name: "tempo_uso", type: { basic: DATE }}
+      { name: "dosagem", type: { basic: TEXT }}
+      { name: "metodo_uso", type: { basic: TEXT }}
+      { name: "reacoes_adversas", type: { basic: LIST, info: { subTypes: { basic: TEXT }, frozen: false } } }
+      { name: "contra_indicacao", type: { basic: LIST, info: { subTypes: { basic: TEXT }, frozen: false } } } # depois transformar em array
+      { name: "orientacao", type: { basic: TEXT } }
+      { name: "data_criacao", type: { basic: DATE } }
+    ]
+    ifNotExists: true
+  )
+
+
+}
