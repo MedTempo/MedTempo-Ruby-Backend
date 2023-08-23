@@ -1,4 +1,4 @@
-mutation InsertUserFamilhar(
+mutation InsertUserFamiliar(
   $id: Uuid!,
   $nome: String!,
   $sobrenome: String!,
@@ -12,7 +12,7 @@ mutation InsertUserFamilhar(
   $local_trabalho: String!,
 
 ){
-  user_familhar: insertusuario_familhar(value: {
+  user_familiar: insertusuario_familiar(value: {
     id: $id,
     nome: $nome,
     sobrenome: $sobrenome,

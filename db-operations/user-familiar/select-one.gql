@@ -1,5 +1,5 @@
-query SelectOneUserFamilhar($user: String!){
-  usuario_familhar(value: { email: $user }){
+query SelectOneUserFamiliar($user: String!){
+  usuario_familiar(value: { email: $user }){
     values {
       id,
       email,

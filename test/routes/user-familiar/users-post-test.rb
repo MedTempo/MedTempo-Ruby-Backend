@@ -21,41 +21,31 @@
 require "test/unit"
 require "rack/test"
 
-
 module TestModule
-    def test_2_Login 
-        3.times do | i |
-            mock_usr = {
-                "email"=> @@mock_email,
-                "senha"=> @@mock_pass, 
-                "user_type" => i + 1,
-            }
+    def test_1_UserFamiliarPost
+
     
-            post "/login", JSON.generate(mock_usr), { "Content Type" => "application/json" }
+        mock_usr = {
+            "nome"=>"oi",
+            "sobrenome"=>"ooi",
+            "sexo"=>"true", 
+            "email"=> @@mock_email,
+            "senha"=> @@mock_pass, 
+            "data_nascimento"=>"2023-08-04", 
+            "parentesco": "teste parentesco",
+            "local_trabalho": "Trabalho Legal",            
+        }
+
+
+        puts mock_usr
+
+        post "/user-familiar", JSON.generate(mock_usr), { "Content Type" => "application/json" }
+
+        puts JSON.generate(last_response.body)
     
-            puts JSON.generate(last_response.body)
+        assert last_response.ok?
+
+        puts "\n\n\n\n"
     
-            assert last_response.ok?
-    
-            get "/"
-    
-            assert last_response.ok?
-    
-            puts last_response.headers
-    
-            puts last_response.cookies
-        end
     end
-
-    def test_1_AAAA
-        get "/"
-
-        puts last_response.headers
-
-        puts "cookie bg #{last_response.status}"
-
-        puts last_request.cookies
-
-    end
-
-end 
+end

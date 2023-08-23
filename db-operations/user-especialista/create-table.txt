@@ -1,4 +1,4 @@
-mutation createTableUsersPessoal {
+mutation createTableUsersEspecialista {
   usuario_especialista: createTable(
     keyspaceName: "medtempo"
     tableName: "usuario_especialista"

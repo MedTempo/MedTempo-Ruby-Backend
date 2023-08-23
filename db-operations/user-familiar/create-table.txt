@@ -1,7 +1,7 @@
-mutation createTableUsersFamilhar {
-  usuario_familhar: createTable(
+mutation createTableUsersFamiliar {
+  usuario_familiar: createTable(
     keyspaceName: "medtempo"
-    tableName: "usuario_familhar"
+    tableName: "usuario_familiar"
     partitionKeys: [
       { name: "id", type: { basic: UUID } }
       { name: "email", type: { basic: TEXT } }
@@ -30,19 +30,19 @@ mutation createTableUsersFamilhar {
   )
   index_data_nascimento: createIndex(
     keyspaceName: "medtempo"
-    tableName: "usuario_familhar"
+    tableName: "usuario_familiar"
     columnName: "data_nascimento"
     ifNotExists: true
   )
   index_sexo: createIndex(
     keyspaceName: "medtempo"
-    tableName: "usuario_familhar"
+    tableName: "usuario_familiar"
     columnName: "sexo"
     ifNotExists: true
   )
   index_email: createIndex(
     keyspaceName: "medtempo"
-    tableName: "usuario_familhar"
+    tableName: "usuario_familiar"
     columnName: "email"
     ifNotExists: true
   )
