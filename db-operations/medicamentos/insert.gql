@@ -1,0 +1,47 @@
+mutation InsertMedicamentos(
+    $id: Uuid!,
+    $usuario_especialista: Uuid!,
+    $usuario_pessoal: Uuid!,
+  
+    $nome: String!,
+  
+    $descricao: String!,
+    $intervalo_uso: String!
+    $tempo_uso: Date!,
+    $dosagem: String!,
+    $metodo_uso: String!,
+    $reacoes_adversas: [String!]!,
+    $contra_indicacao: [String!]!,
+    $orientacao: String!,
+    $data_criacao: Date!,
+  
+  	$expiration: Int!
+){
+    insertmedicamentos(
+      value: {
+    id: $id
+    usuario_especialista: $usuario_especialista,
+    usuario_pessoal: $usuario_pessoal,
+    nome: $nome,
+    descricao: $descricao,
+    intervalo_uso: $intervalo_uso,
+    tempo_uso: $tempo_uso,
+    dosagem: $dosagem,
+    metodo_uso: $metodo_uso,
+    reacoes_adversas: $reacoes_adversas
+    contra_indicacao: $contra_indicacao,
+    orientacao: $orientacao
+    data_criacao: $data_criacao
+    },
+    options: {
+      ttl: $expiration
+    }
+    ){
+    value{
+      id
+      usuario_especialista
+      usuario_pessoal,
+      
+    }
+  }
+}

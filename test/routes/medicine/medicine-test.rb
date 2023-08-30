@@ -37,25 +37,17 @@ module TestModule
     
             assert last_response.ok?
     
-            get "/"
+            post "/medicine"
+
+            puts last_response.body
     
             assert last_response.ok?
     
             puts last_response.headers
+
+            puts JSON.generate(last_response.body)
     
-            puts last_response.cookies
         end
-    end
-
-    def test_1_AAAA
-        get "/"
-
-        puts last_response.headers
-
-        puts "cookie bg #{last_response.status}"
-
-        puts last_request.cookies
-
     end
 
 end 

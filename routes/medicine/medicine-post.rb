@@ -22,13 +22,13 @@ require "sinatra"
 require "./config/database"
 require "json"
 
-module MedicinesPost
-    ["/medicines"].each do | path | Sinatra::Application::post path do
+module MedicinePost
+    ["/medicine"].each do | path | Sinatra::Application::post path do
         protection!
 
-        medicines = Db.execute(Db.db_operations["medicamentos"])
+       # medicines = Db.execute(Db.db_operations["medicamentos"])
 
-        puts medicines
+       # puts medicines
 
         body "Medicines"
     end end
