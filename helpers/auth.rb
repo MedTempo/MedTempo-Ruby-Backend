@@ -40,9 +40,7 @@ module Sinatra
           raise "Ivalid Host"
          end
 
-         if (allowed.include?(jwt[0][:usr_type]) == false)
-          raise "Hello"
-         end
+        puts allowed.include?(jwt[0][:usr_type]) == false
 
         rescue JWT::DecodeError, JWT::ExpiredSignature => error
           logger.info error
