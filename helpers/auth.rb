@@ -24,7 +24,7 @@ require "json"
 # Checks if user is authenticated, if not send a error back to client
 module Sinatra
   module Auth
-    def protection!
+    def protection!(allowed = [1,2,3])
        logger.info "Protection Helper Begin:"
 
 
@@ -36,11 +36,15 @@ module Sinatra
 
          if request.ip == jwt[0]["ip"]
           logger.info "ok"
-         elsif 
-          raise "ivalid Host"
+         else
+          raise "Ivalid Host"
          end
 
-        rescue => error
+         if allowed.include?(jwt[0][:usr_type]) == false
+          raise "Hello"
+         end
+
+        rescue JWT::DecodeError, JWT::ExpiredSignature => error
           logger.info error
           session[:jwt] = nil
           halt 401, JSON.generate({ :message => "You Shall Not Pass! #{error}" })

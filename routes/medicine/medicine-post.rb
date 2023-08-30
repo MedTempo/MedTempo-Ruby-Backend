@@ -24,11 +24,33 @@ require "json"
 
 module MedicinePost
     ["/medicine"].each do | path | Sinatra::Application::post path do
-        protection!
+        protection!([2])
+        
+        medicine = JSON.parse(request.body.read)
 
-       # medicines = Db.execute(Db.db_operations["medicamentos"])
+        verify! medicine,[
+            "id",
+            "usuario_especialista",
+            "usuario_pessoal",
+            "nome",
+            "descricao",
+            "intervalo_uso",
+            "tempo_uso",
+            "dosagem",
+            "metodo_uso",
+            "reacoes_adversas",
+            "contra_indicacao",
+            "orientacao",
+            "data_criacao",
+            "expiration"   
+          ]
 
-       # puts medicines
+
+        #medicines = Db.execute(Db.db_operations["medicamentos"]["insert"], {}, false)
+
+        puts medicine
+
+       logger.info session[:jwt]
 
         body "Medicines"
     end end
