@@ -40,7 +40,7 @@ module Sinatra
           raise "Ivalid Host"
          end
 
-         if allowed.include?(jwt[0][:usr_type]) == false
+         if (allowed.include?(jwt[0][:usr_type]) == false)
           raise "Hello"
          end
 
