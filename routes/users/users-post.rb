@@ -104,7 +104,7 @@ module UsersPost
 
         req_email = JSON.parse(Db.execute(Db.db_operations["user-familiar"]["select-one"], { :user => user["email"] }, false))
 
-        puts req_email
+        #puts req_email
             
         if req_email["data"]["usuario_familiar"]["values"].empty? == false
             logger.info req_email
@@ -126,7 +126,7 @@ module UsersPost
         
 
         res = Db.execute(Db.db_operations["user-familiar"]["insert"], user, false)
-        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 3 })   
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 3 }), persistent: true 
 
         logger.info res
         body JSON.generate({ :message => "ok" })           

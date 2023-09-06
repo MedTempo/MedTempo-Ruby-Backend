@@ -1,0 +1,19 @@
+
+query SelectMedicamentos ($user: Uuid!) {
+  medicamentos: medicamentos(value: { usuario_pessoal: $user }){
+    values{
+      medico,
+      usuario_pessoal,
+      nome,
+      intervalo_uso,
+      tempo_uso,
+      dosagem,
+      metodo_uso,
+      dosagem,
+      reacoes_adversas,
+      contra_indicacao,
+      orientacao,
+      data_criacao
+    }
+  }
+}

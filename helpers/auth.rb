@@ -20,6 +20,7 @@
 
 require "sinatra"
 require "json"
+require "./errors/user-permissions"
 
 # Checks if user is authenticated, if not send a error back to client
 module Sinatra
@@ -40,13 +41,30 @@ module Sinatra
           raise "Ivalid Host"
          end
 
-        puts allowed.include?(jwt[0][:usr_type]) == false
+        #puts jwt[0]
+        #puts "\n\n\n\n\n\nPermision type for #{jwt[0]["user_type"]} is #{allowed.include?(jwt[0][]) == false}\n\n\n\n\n"
+
+        if allowed.include?(jwt[0]["user_type"]) == false
+          raise PermissionErr
+        end
 
         rescue JWT::DecodeError, JWT::ExpiredSignature => error
           logger.info error
           session[:jwt] = nil
           halt 401, JSON.generate({ :message => "You Shall Not Pass! #{error}" })
+
+        rescue PermissionErr => error
+          logger.info error
+          session[:jwt] = nil
+          halt 403, JSON.generate({ :message => "You dont have necessary permission to proceed. Error for #{jwt[0]["user_type"]}" })
+    
+        rescue => error
+          logger.info error
+          session[:jwt] = nil
+          halt 500, JSON.generate({ :message => "Something Wrong is Not Right! #{error}" })
+    
         end
+
       else
           halt 400, JSON.generate({ :message => "Invalid Token Format" })
       end

@@ -4,8 +4,8 @@ mutation createMedicamentos {
     tableName: "medicamentos"
     partitionKeys: [
       { name: "id", type: { basic: UUID } }
-      { name: "medico", type: { basic: UUID } }
-      { name: "usuario_pessoal", type: { basic: UUID } }
+      { name: "usuario_especialista", type: { basic: TEXT } }
+      { name: "usuario_pessoal", type: { basic: TEXT } }
     ]
     values: [
       { name: "nome", type: { basic: TEXT } }
@@ -18,9 +18,23 @@ mutation createMedicamentos {
       { name: "contra_indicacao", type: { basic: LIST, info: { subTypes: { basic: TEXT }, frozen: false } } } # depois transformar em array
       { name: "orientacao", type: { basic: TEXT } }
       { name: "data_criacao", type: { basic: DATE } }
+      { name: "tomado", type: { basic: BOOLEAN }}
     ]
     ifNotExists: true
   )
 
+    index_user_pessoal: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "medicamentos"
+    columnName: "usuario_pessoal"
+    ifNotExists: true
+ 		)
+  
+      index_user_especialista: createIndex(
+    keyspaceName: "medtempo"
+    tableName: "medicamentos"
+    columnName: "usuario_especialista"
+    ifNotExists: true
+ 		)
 
 }

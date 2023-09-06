@@ -18,7 +18,7 @@
     
 =end
 
-# Load the Graphql Queries on Memory
+# Load the Graphql Queries on Memoryputs
 
 module DbPrepare
     def self.preload
@@ -36,7 +36,7 @@ module DbPrepare
 
         puts "\nAll Queries Have Been Loaded!\n"
 
-        puts "\n\n\n#{queries}\n\n\n"
+        #puts "\n\n\n#{queries}\n\n\n"
 
         return queries
     end

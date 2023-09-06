@@ -18,25 +18,13 @@
     
 =end
 
+require "sinatra"
+require "./config/database"
 
-require "bunny"
-require "json"
-
-puts "Bunny: #{ENV["RMQ_HOST"]}"
-
-puts "Starting Bunny (Rabbitmq driver) ..."
-
-Rabbitmq = Hash.new
-
-Rabbitmq[:connection] = Bunny.new hostname: ENV["RMQ_HOST"], port: ENV["RMQ_PORT"].to_i, virtual_host: ENV["RMQ_VHOST"], username: ENV["RMQ_USR"], password: ENV["RMQ_PASS"]
-Rabbitmq[:instance] = Rabbitmq[:connection].start               
-Rabbitmq[:channel] = Rabbitmq[:instance].create_channel
-
-Rabbitmq[:queues] = {
-    :emails => Rabbitmq[:channel].queue("emails", durable: true)
-}
-
-puts "Rabbitmq connection established"
-
-
-#Rabbitmq[:queues][:queue].publish("My Queue is Working", persistent: true)
+module MedicineGet
+    ["/medicine"].each do | path | Sinatra::Application::get path do
+        protection!
+        res = Db.execute(Db.db_operations["medicamentos"]["select"], { :user => "klmrfcc@foo.com" } , false)
+        body res           
+    end end
+end

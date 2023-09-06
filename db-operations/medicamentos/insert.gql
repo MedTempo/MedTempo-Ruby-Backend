@@ -1,7 +1,7 @@
 mutation InsertMedicamentos(
     $id: Uuid!,
-    $usuario_especialista: Uuid!,
-    $usuario_pessoal: Uuid!,
+    $usuario_especialista: String!,
+    $usuario_pessoal: String!,
   
     $nome: String!,
   

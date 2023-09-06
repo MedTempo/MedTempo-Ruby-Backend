@@ -25,11 +25,9 @@ require "json"
 module Sinatra
   module VerifyData
     def verify!(data = {}, required)
-        puts "Data: #{data}\n Required: #{required}"
+        #puts "Data: #{data}\n Required: #{required}"
 
-        puts data.keys
-
-        puts "Intersection: #{}"
+        #puts data.keys
 
         if (data.keys & required).any? == false
             return halt 400, JSON.generate({ :message => "Invalid Filds" })

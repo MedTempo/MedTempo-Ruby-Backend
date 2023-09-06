@@ -83,7 +83,7 @@ class Cassandra
             puts res.body
             raise "\u274c Db Error #{res.code}!"
 
-        elsif res["errors"] != nil
+        elsif res["error"] != nil
             raise "\u274c Db Error but res code is #{res.code}!"
         end
 

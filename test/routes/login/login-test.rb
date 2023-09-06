@@ -41,20 +41,20 @@ module TestModule
     
             assert last_response.ok?
     
-            puts last_response.headers
+            #puts last_response.headers
     
-            puts last_response.cookies
+            #puts last_response.cookies
         end
     end
 
     def test_1_AAAA
         get "/"
 
-        puts last_response.headers
+       # puts last_response.headers
 
         puts "cookie bg #{last_response.status}"
 
-        puts last_request.cookies
+       # puts last_request.cookies
 
     end
 

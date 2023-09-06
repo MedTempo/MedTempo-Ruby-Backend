@@ -21,6 +21,8 @@
 require "sinatra"
 require "./config/database"
 require "json"
+require "securerandom"
+require "date"
 
 module MedicinePost
     ["/medicine"].each do | path | Sinatra::Application::post path do
@@ -29,7 +31,6 @@ module MedicinePost
         medicine = JSON.parse(request.body.read)
 
         verify! medicine,[
-            "id",
             "usuario_especialista",
             "usuario_pessoal",
             "nome",
@@ -41,18 +42,21 @@ module MedicinePost
             "reacoes_adversas",
             "contra_indicacao",
             "orientacao",
-            "data_criacao",
-            "expiration"   
           ]
 
+        medicine["id"] = SecureRandom.uuid
+        medicine["data_criacao"] = Time.now.strftime("%Y-%m-%d")
 
-        #medicines = Db.execute(Db.db_operations["medicamentos"]["insert"], {}, false)
+        medicine["expiration"] = (Date.parse(medicine["tempo_uso"]) - Date.today).to_i * (3600 * 24) * 5
 
-        puts medicine
+         #  puts "\n\n\n\n\n\n\n\n\n#{medicine[:expiration]}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+         puts "\n\n\n\n\n\n\n\n\n"
+         puts JSON.generate(medicine)
+         puts "\n\n\n\n\n\n\n\n\n"
 
-       logger.info session[:jwt]
+        post = Db.execute(Db.db_operations["medicamentos"]["insert"], medicine, false)
 
-        body "Medicines"
+        body post
     end end
 
 end
