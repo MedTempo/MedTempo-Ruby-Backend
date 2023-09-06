@@ -55,7 +55,7 @@ module UsersPost
         
         res = Db.execute(Db.db_operations["user-pessoal"]["insert"], user, false)
 
-        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 1 })
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :name => user["nome"], :for  => "verification-code", :usr_type => 1 })
 
         logger.info res
         body JSON.generate({ :message => "ok" })           
@@ -90,7 +90,7 @@ module UsersPost
         
 
         res = Db.execute(Db.db_operations["user-especialista"]["insert"], user, false)
-        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 2 })
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :name => user["nome"], :for => "verification-code", :usr_type => 2 })
 
         logger.info res
         body JSON.generate({ :message => "ok" })           
@@ -126,7 +126,7 @@ module UsersPost
         
 
         res = Db.execute(Db.db_operations["user-familiar"]["insert"], user, false)
-        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :for => "welcome", :usr_type => 3 }), persistent: true 
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :name => user["nome"], :for => "verification-code", :usr_type => 3 }), persistent: true 
 
         logger.info res
         body JSON.generate({ :message => "ok" })           
