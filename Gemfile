@@ -14,3 +14,4 @@ gem "bunny" # Rabbitmq server
 
 gem "redis" # Cache Database
 
+gem "mail", :group => :development # Mail lib for Unitary Test only

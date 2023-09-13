@@ -90,7 +90,7 @@ module UsersPost
         
 
         res = Db.execute(Db.db_operations["user-especialista"]["insert"], user, false)
-        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :name => user["nome"], :for => "verification-code", :usr_type => 2 })
+        Rabbitmq[:queues][:emails].publish JSON.generate({ :to => user["email"], :name => user["nome"], :for => "verification-code", :usr_type => 2 }), persistent: true 
 
         logger.info res
         body JSON.generate({ :message => "ok" })           
@@ -108,7 +108,7 @@ module UsersPost
             
         if req_email["data"]["usuario_familiar"]["values"].empty? == false
             logger.info req_email
-            return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" })
+            return halt 409, JSON.generate({ :message => "error #{user["email"]} exists" }), persistent: true 
         end
 
         logger.info user

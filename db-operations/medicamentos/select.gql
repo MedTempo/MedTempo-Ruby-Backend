@@ -1,8 +1,7 @@
-
-query SelectMedicamentos ($user: Uuid!) {
+query SelectMedicamentos ($user: String!) {
   medicamentos: medicamentos(value: { usuario_pessoal: $user }){
     values{
-      medico,
+      usuario_especialista,
       usuario_pessoal,
       nome,
       intervalo_uso,

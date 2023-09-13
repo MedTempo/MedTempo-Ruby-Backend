@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE                                      COMMAND   CREATED          STATUS          PORTS     NAMES
+8eb7cf06f2a0   ghcr.io/graalvm/graalvm-community:latest   "bash"    17 minutes ago   Up 17 minutes             nice_villani

@@ -23,7 +23,7 @@ require "rack/test"
 require "date"
 
 module TestModule
-    def test_2_Medicine
+    def test_2_Medicine_Post
 
         3.times do | i | 
             mock_usr = {
@@ -82,10 +82,15 @@ module TestModule
 
         post "/login", JSON.generate(mock_usr), { "Content Type" => "application/json" }
 
+        mock_query = {
+            "email"=> @@mock_email,
+        }
 
-        get "/medicine"
+        get "/medicine", JSON.generate(mock_query), { "Content Type" => "application/json" }
 
         puts last_response.body
+
+        assert last_response.ok?
     end
 
 end 

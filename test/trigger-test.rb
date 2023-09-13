@@ -50,6 +50,8 @@ module TestModule
     @@mock_email =  "#{(0...(rand(10) + 4)).map { ('a'..'z').to_a[rand(26)] }.join}@foo.com"
     @@mock_pass =  "#{(0...(rand(10) + 4)).map { ('a'..'z').to_a[rand(26)] }.join}"  
 
+#    @@mock_email =  "teste1234@1236"
+ #   @@mock_pass =  "Lorem Ipsum"  
 end
 
 class MedTempoTestes < Test::Unit::TestCase

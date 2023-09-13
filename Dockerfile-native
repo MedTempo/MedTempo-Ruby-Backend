@@ -14,10 +14,13 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with MedTempo-Backend++.  If not, see <https://www.gnu.org/licenses/>5.
 
-FROM ruby:latest as base 
+FROM ghcr.io/graalvm/truffleruby-community:latest as base 
 
 WORKDIR /usr/src/MedTempo-Backend
 
+RUN uname -a 
+
+#RUN gu install ruby
 
 COPY ./Gemfile ./Gemfile
 COPY ./Gemfile.lock ./Gemfile.lock
@@ -37,7 +40,7 @@ CMD [ "bundle", "exec", "rackup" ]
 
 FROM base as test
 
-CMD [ "ruby", "./test/trigger-test.rb" ]
+CMD [ "truffleruby",  "--native", "./test/trigger-test.rb"]
 
 
 # Run with: sudo docker build -t medtempo-backend --target dev . && sudo docker run -it --name backend-instance --rm --env-file .env --network host medtempo-backend
