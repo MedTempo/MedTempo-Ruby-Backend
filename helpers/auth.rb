@@ -69,6 +69,7 @@ module Sinatra
           halt 400, JSON.generate({ :message => "Invalid Token Format" })
       end
 
+      return jwt[0]
     end
   end
 

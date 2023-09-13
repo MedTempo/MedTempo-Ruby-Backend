@@ -1,5 +1,5 @@
-query SelectMedicamentos ($user: String!) {
-  medicamentos: medicamentos(value: { usuario_pessoal: $user }){
+query SelectMedicamentos ($user: String!, $medico: String!) {
+  medicamentos: medicamentos(value: { usuario_pessoal: $user, usuario_especialista: $medico }){
     values{
       usuario_especialista,
       usuario_pessoal,

@@ -42,7 +42,7 @@ module TestModule
 
             mock_medicine = {
                 #:id => "cd0ade88-de9d-4e44-8add-b2cdb29b6030",
-                :usuario_especialista => @@mock_email,
+                #:usuario_especialista => @@mock_email,
                 :usuario_pessoal => @@mock_email,
                 :nome => "Tilenol",
                 :descricao => "Tilenol é um remedio que ajuda com ...",
@@ -83,10 +83,10 @@ module TestModule
         post "/login", JSON.generate(mock_usr), { "Content Type" => "application/json" }
 
         mock_query = {
-            "email"=> @@mock_email,
+            "user"=> @@mock_email
         }
 
-        get "/medicine", JSON.generate(mock_query), { "Content Type" => "application/json" }
+        get "/medicine?user=#{mock_query["user"]}", { "Content Type" => "application/json" }
 
         puts last_response.body
 

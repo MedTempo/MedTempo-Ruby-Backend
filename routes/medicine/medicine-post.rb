@@ -26,12 +26,12 @@ require "date"
 
 module MedicinePost
     ["/medicine"].each do | path | Sinatra::Application::post path do
-        protection!([2])
+        auth = protection!([2])
         
         medicine = JSON.parse(request.body.read)
 
         verify! medicine,[
-            "usuario_especialista",
+            #"usuario_especialista",
             "usuario_pessoal",
             "nome",
             "descricao",
@@ -44,6 +44,7 @@ module MedicinePost
             "orientacao",
           ]
 
+        medicine["usuario_especialista"] = auth["user"]
         medicine["id"] = SecureRandom.uuid
         medicine["data_criacao"] = Time.now.strftime("%Y-%m-%d")
 

@@ -23,8 +23,14 @@ require "./config/database"
 
 module MedicineGet
     ["/medicine"].each do | path | Sinatra::Application::get path do
-        protection!
-        res = Db.execute(Db.db_operations["medicamentos"]["select"], { :user => "klmrfcc@foo.com" } , false)
+        auth = protection!
+
+        puts "teste2335"
+        doctor = params["user"]
+        #verify! query,  ["doctor"]
+
+
+        res = Db.execute(Db.db_operations["medicamentos"]["select"], { :user => auth["user"], :medico => doctor } , false)
         body res           
     end end
 end

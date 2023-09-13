@@ -73,7 +73,7 @@ module LoginPost
 
         if db_usr == user["email"] && pass_compare == true
             expiration = Time.now.to_i + 3600
-            session[:jwt] = JWT.encode({ :id => db_id, :user_type => usr_type , :ip => request.ip , :exp => expiration }, ENV["ENV_SECRET"], "HS512") 
+            session[:jwt] = JWT.encode({ :id => db_id, :user => db_usr, :user_type => usr_type , :ip => request.ip , :exp => expiration }, ENV["ENV_SECRET"], "HS512") 
 
             logger.info session[:jwt]
             body JSON.generate({ :recived => :logged_in })     
