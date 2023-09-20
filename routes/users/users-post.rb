@@ -31,7 +31,7 @@ module UsersPost
         user = JSON.parse(request.body.read)
         verify! user,  ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "descricao" ]
 
-        req_email = JSON.parse(Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false))
+        req_email = Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false)
         
         puts req_email
 
@@ -66,7 +66,7 @@ module UsersPost
         user = JSON.parse(request.body.read)
         verify! user, ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "crm", "local_trabalho"]
 
-        req_email = JSON.parse(Db.execute(Db.db_operations["user-especialista"]["select-one"], { :user => user["email"] }, false))
+        req_email = Db.execute(Db.db_operations["user-especialista"]["select-one"], { :user => user["email"] }, false)
         
         logger.info req_email
 
@@ -102,7 +102,7 @@ module UsersPost
 
         verify! user, [ "nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "local_trabalho" ]
 
-        req_email = JSON.parse(Db.execute(Db.db_operations["user-familiar"]["select-one"], { :user => user["email"] }, false))
+        req_email = Db.execute(Db.db_operations["user-familiar"]["select-one"], { :user => user["email"] }, false)
 
         #puts req_email
             

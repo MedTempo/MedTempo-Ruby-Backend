@@ -83,11 +83,15 @@ class Cassandra
             puts res.body
             raise "\u274c Db Error #{res.code}!"
 
-        elsif res["errors"].kind_of?(Array)
+        end
+
+        json_body = JSON.parse(res.body)
+
+        if json_body.has_key? "errors"
             raise "\u274c Db Error but res code is #{res.code}!"
         end
 
-        return res.body
+        return json_body
     end
 end
 

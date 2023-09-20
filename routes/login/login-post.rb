@@ -50,7 +50,7 @@ module LoginPost
         halt 400, JSON.generate({ :message => "User Type Not Found" })
        end
 
-       exists = JSON.parse(Db.execute(Db.db_operations[query_name]["select-one-with-pass"], { :user => user["email"] } , false))
+       exists = Db.execute(Db.db_operations[query_name]["select-one-with-pass"], { :user => user["email"] } , false)
 
        puts exists
 
