@@ -50,8 +50,8 @@ module MedicinePost
 
         medicine["expiration"] = (Date.parse(medicine["tempo_uso"]) - Date.today).to_i * (3600 * 24) * 5
 
-         #  puts "\n\n\n\n\n\n\n\n\n#{medicine[:expiration]}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-         puts "\n\n\n\n\n\n\n\n\n"
+         #  logger.info "\n\n\n\n\n\n\n\n\n#{medicine[:expiration]}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+         puts "\n\n\n\n\n\n\n\n\nlooooger"
          puts JSON.generate(medicine)
          puts "\n\n\n\n\n\n\n\n\n"
 

@@ -88,6 +88,7 @@ class Cassandra
         json_body = JSON.parse(res.body)
 
         if json_body.has_key? "errors"
+            puts json_body
             raise "\u274c Db Error but res code is #{res.code}!"
         end
 

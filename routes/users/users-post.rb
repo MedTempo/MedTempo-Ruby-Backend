@@ -33,7 +33,7 @@ module UsersPost
 
         req_email = Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false)
         
-        puts req_email
+        #puts req_email
 
         if req_email["data"]["usuario_pessoal"]["values"].empty? == false
             logger.info req_email

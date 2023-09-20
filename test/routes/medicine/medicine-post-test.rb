@@ -63,6 +63,7 @@ module TestModule
     
             if (i + 1) == 2
                 assert last_response.status == 200
+                post "/medicine", JSON.generate(mock_medicine), { "Content Type" => "application/json" }
             elsif (i + 1) == 1 || (i + 1) == 3
                 assert last_response.status == 403
             end

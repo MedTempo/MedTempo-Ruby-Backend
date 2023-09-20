@@ -25,12 +25,11 @@ module MedicineGet
     ["/medicine"].each do | path | Sinatra::Application::get path do
         auth = protection!
 
-        puts "teste2335"
-        doctor = params["user"]
+        doctor = params["doctor"]
         #verify! query,  ["doctor"]
 
 
-        res = Db.execute(Db.db_operations["medicamentos"]["select"], { :user => auth["user"], :medico => doctor } , false)
+        res = Db.execute(Db.db_operations["medicamentos"]["select"], { :user => auth["user"], :medico => doctor || "" } , false)
         body res           
     end end
 end
