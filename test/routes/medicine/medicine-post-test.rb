@@ -72,25 +72,4 @@ module TestModule
             puts JSON.generate(last_response.body)
         end
     end
-
-    def test_3_MedicineGet
-        mock_usr = {
-            "email"=> @@mock_email,
-            "senha"=> @@mock_pass, 
-            "user_type" => 1,
-        }
-
-        post "/login", JSON.generate(mock_usr), { "Content Type" => "application/json" }
-
-        mock_query = {
-            "user"=> @@mock_email
-        }
-
-        get "/medicine?user=#{mock_query["user"]}", { "Content Type" => "application/json" }
-
-        puts last_response.body
-
-        assert last_response.ok?
-    end
-
 end 
