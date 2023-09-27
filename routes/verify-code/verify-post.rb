@@ -18,29 +18,16 @@
     
 =end
 
-require "test/unit"
-require "rack/test"
-require "date"
-require "mail"
+require "sinatra"
+require "./config/database"
+require "json"
 
-module TestModule
-    def test_2_CadastroVerify
-        Mail.defaults do
-            retriever_method :imap, :address    => "imap.gmail.com",
-                                    :port       => 993,
-                                    :user_name  => ENV["EMAIL_USR"],
-                                    :password   => ENV["EMAIL_PASS"],
-                                    :enable_ssl => true
-          end
+module VerifyCodePost
+    ["/verify-code"].each do | path | Sinatra::Application::post path do
 
-          #puts Mail.all
+        #res = Db.execute(Db.db_operations["generic"]["select-all"], { :keyspace => Db.db_keyspace }, true)
+        #body res      
 
-          teste = imap.select('"[Gmail]/Sent Mail"')
-
-          puts teste
-
-          puts Mail.all
-
-          puts "END all mails"
-    end
-end 
+        body "verify"
+    end end
+end

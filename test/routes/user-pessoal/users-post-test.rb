@@ -26,8 +26,8 @@ module TestModule
 
     
         mock_usr = {
-            "nome"=>"oi",
-            "sobrenome"=>"ooi",
+            "nome"=>"#{(0...(rand(10) + 4)).map { ('a'..'z').to_a[rand(26)] }.join}",
+            "sobrenome"=>"#{(0...(rand(10) + 4)).map { ('a'..'z').to_a[rand(26)] }.join}",
             "sexo"=>"true", 
             "email"=> @@mock_email,
             "senha"=> @@mock_pass, 
