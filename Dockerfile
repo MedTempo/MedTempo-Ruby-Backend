@@ -28,16 +28,18 @@ COPY ./ ./
 
 
 EXPOSE 7777 
+EXPOSE 9292
 
 
 FROM base as dev
 
-CMD [ "bundle", "exec", "rackup" ]
+CMD [ "bundle", "exec", "rackup", "--port", "7777", "--host", "0.0.0.0" ]
 
 
 FROM base as test
 
 CMD [ "ruby", "./test/trigger-test.rb" ]
 
+# New run with: sudo docker compose -f docker-compose.json build && sudo docker compose -f docker-compose.json up 
 
-# Run with: sudo docker build -t medtempo-backend --target dev . && sudo docker run -it --name backend-instance --rm --env-file .env --network host medtempo-backend
+# Deprecated Run with: sudo docker build -t medtempo-backend --target dev . && sudo docker run -it --name backend-instance --rm --env-file .env --network host medtempo-backend
