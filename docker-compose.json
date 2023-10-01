@@ -2,16 +2,21 @@
     "version": "2.21.0",
 
     "services": {
-        "web": {
+        "backend": {
             "build": {
                 "context": ".", 
                 "dockerfile": "Dockerfile",
                 "target": "dev"
             },
             "ports": [
-                "9292:9292",
-                "7777:7777"
+                "7777-7780:7777"
             ],
+            "network_mode": "bridge",
+
+            "deploy": {
+                "mode": "replicated",
+                "replicas": 3
+            },
 
             "env_file": [
                 ".env"
