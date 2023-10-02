@@ -11,7 +11,7 @@
             "ports": [
                 "7777-7780:7777"
             ],
-            "network_mode": "bridge",
+            "networks": ["medtempo_back"],
 
             "deploy": {
                 "mode": "replicated",
@@ -20,7 +20,28 @@
 
             "env_file": [
                 ".env"
+            ],
+
+            "depends_on": [
+                "queue"
             ]
+        },
+
+
+        "queue": {
+            "image": "rabbitmq:latest",
+            "networks": ["medtempo_back"],
+            "build": {
+                "args": {
+                    "hostname": "0.0.0.0"
+                }
+            }
+        }
+    },
+
+    "networks": {
+        "medtempo_back": {
+            "driver": "host"
         }
     }
 }

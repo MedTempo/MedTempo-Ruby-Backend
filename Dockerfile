@@ -19,8 +19,7 @@ FROM ruby:latest as base
 WORKDIR /usr/src/MedTempo-Backend
 
 
-COPY ./Gemfile ./Gemfile
-COPY ./Gemfile.lock ./Gemfile.lock
+COPY ./Gemfile* ./
 
 RUN bundle install 
 
@@ -33,8 +32,8 @@ EXPOSE 9292
 
 FROM base as dev
 
-CMD [ "bundle", "exec", "rackup", "--port", "7777", "--host", "0.0.0.0" ]
-
+#CMD [ "bundle", "exec", "rackup", "--port", "7777", "--host", "0.0.0.0" ]
+CMD [ "./await.sh" ]
 
 FROM base as test
 
