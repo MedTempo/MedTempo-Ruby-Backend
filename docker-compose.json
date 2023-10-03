@@ -20,22 +20,7 @@
 
             "env_file": [
                 ".env"
-            ],
-
-            "depends_on": [
-                "queue"
             ]
-        },
-
-
-        "queue": {
-            "image": "rabbitmq:latest",
-            "networks": ["medtempo_back"],
-            "build": {
-                "args": {
-                    "hostname": "0.0.0.0"
-                }
-            }
         }
     },
 
