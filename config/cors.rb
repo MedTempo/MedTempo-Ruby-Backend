@@ -22,8 +22,8 @@
 module Cors
     def self.allow(allowed_origins = "*", methods = "POST, GET, PATCH, DELETE, OPTIONS", credentials = "true") 
         Sinatra::Application::before do 
-            if allowed_origins.include?(request.env["HTTP_ORIGIN"]) || allowed_origins = "*"
-                response.headers["Access-Control-Allow-Origin"] = request.env["HTTP_ORIGIN"] || allowed_origins = "*"
+            if allowed_origins.include?(request.env["HTTP_ORIGIN"].to_s) || allowed_origins = "*"
+                response.headers["Access-Control-Allow-Origin"] = request.env["HTTP_ORIGIN"] || = "*"
                 response.headers["Access-Control-Allow-Methods"] = methods
                 response.headers["Access-Control-Allow-Credentials"] = credentials
             end
