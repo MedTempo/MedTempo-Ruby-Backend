@@ -27,8 +27,14 @@ require "argon2"
 
 module UsersPost
     ["/user-pessoal", "/usuarios"].each do | path | Sinatra::Application::post path do
-        
-        user = JSON.parse(request.body.read)
+
+        begin
+            user = JSON.parse(request.body.read)
+        rescue => exception
+            logger.info exception
+            return halt 400, JSON.generate({ :message => "parse error" })
+        end
+
         verify! user,  ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "descricao" ]
 
         req_email = Db.execute(Db.db_operations["user-pessoal"]["select-one"], { :user => user["email"] }, false)
@@ -62,8 +68,14 @@ module UsersPost
     end end
 
     ["/user-especialista"].each do | path | Sinatra::Application::post path do
-        
-        user = JSON.parse(request.body.read)
+ 
+        begin
+            user = JSON.parse(request.body.read)
+        rescue => exception
+            logger.info exception
+            return halt 400, JSON.generate({ :message => "parse error" })
+        end
+ 
         verify! user, ["nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "crm", "local_trabalho"]
 
         req_email = Db.execute(Db.db_operations["user-especialista"]["select-one"], { :user => user["email"] }, false)
@@ -98,7 +110,12 @@ module UsersPost
 
     ["/user-familiar"].each do | path | Sinatra::Application::post path do
         
-        user = JSON.parse(request.body.read)
+        begin
+            user = JSON.parse(request.body.read)   
+        rescue => exception
+            logger.info exception
+            return halt 400, JSON.generate({ :message => "parse error" })
+        end
 
         verify! user, [ "nome", "sobrenome", "sexo", "email", "senha", "data_nascimento", "local_trabalho" ]
 

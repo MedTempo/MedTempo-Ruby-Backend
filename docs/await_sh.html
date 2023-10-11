@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Dockerfile - RDoc Documentation</title>
+<title>await.sh - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -101,33 +101,13 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page Dockerfile">
+<main role="main" aria-label="Page await.sh">
 
-<p>#    Copyright © 2023 Felipe Chiozzotto Gozzani, Heloísa Real, Juliana Barbosa Sandes, Mateus Felipe da Silveira Vieira, Thiago Babtista da Silva Soares # # #    MedTempo-Backend++ is free software: you can redistribute it and/or modify #    it under the terms of the GNU Affero General Public License as published by #    the Free Software Foundation, either version 3 of the License, or #    (at your option) any later version. # #    MedTempo-Backend++ is distributed in the hope that it will be useful, #    but WITHOUT ANY WARRANTY; without even the implied warranty of #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the #    GNU Affero General Public License for more details. # #    You should have received a copy of the GNU Affero General Public License #    along with MedTempo-Backend++.  If not, see &lt;<a href="https://www.gnu.org/licenses">www.gnu.org/licenses</a>/&gt;5.</p>
+<p>!/bin/bash </p>
 
-<p>FROM ruby:latest as base </p>
+<p>sleep 15;</p>
 
-<p>WORKDIR /usr/src/MedTempo-Backend</p>
-
-<p>COPY ./Gemfile* ./</p>
-
-<p>RUN bundle install </p>
-
-<p>COPY ./ ./</p>
-
-<p>EXPOSE 7777  EXPOSE 9292</p>
-
-<p>FROM base as dev</p>
-
-<p>CMD [ “bundle”, “exec”, “rackup”, “–port”, “7777”, “–host”, “0.0.0.0” ] CMD [ “./await.sh” ]</p>
-
-<p>FROM base as test</p>
-
-<p>CMD [ “ruby”, “./test/trigger-test.rb” ]</p>
-
-<p># New run with: sudo docker compose -f <a href="docker-compose_json.html">docker-compose.json</a> build &amp;&amp; sudo docker compose -f <a href="docker-compose_json.html">docker-compose.json</a> up </p>
-
-<p># Deprecated Run with: sudo docker build -t medtempo-backend –target dev . &amp;&amp; sudo docker run -it –name backend-instance –rm –env-file .env –network host medtempo-backend</p>
+<p>bundle exec rackup –port 7777 –host 0.0.0.0</p>
 
 </main>
 

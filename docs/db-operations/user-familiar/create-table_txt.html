@@ -64,40 +64,50 @@
     <li><a href="../../COPYING_txt.html">COPYING</a>
     <li><a href="../../DOCS-LICENSE_txt.html">DOCS-LICENSE</a>
     <li><a href="../../Dockerfile.html">Dockerfile</a>
+    <li><a href="../../Dockerfile-native.html">Dockerfile-native</a>
     <li><a href="../../Gemfile.html">Gemfile</a>
     <li><a href="../../Gemfile_lock.html">Gemfile.lock</a>
     <li><a href="../../Readme_md.html">Readme</a>
-    <li><a href="../../db-operations/generic/drop-any-table.html">drop-any-table</a>
-    <li><a href="../../db-operations/generic/select-all-kind-of-users_txt.html">select-all-kind-of-users</a>
-    <li><a href="../../db-operations/generic/select-all-tables.html">select-all-tables</a>
-    <li><a href="../../db-operations/generic/select-all_gql.html">select-all.gql</a>
-    <li><a href="../../db-operations/user-especialista/create-table_txt.html">create-table</a>
-    <li><a href="../../db-operations/user-especialista/insert_gql.html">insert.gql</a>
-    <li><a href="../../db-operations/user-especialista/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
-    <li><a href="../../db-operations/user-especialista/select-one_gql.html">select-one.gql</a>
-    <li><a href="../../db-operations/user-especialista/select_gql.html">select.gql</a>
-    <li><a href="../../db-operations/user-familhar/create-table_txt.html">create-table</a>
-    <li><a href="../../db-operations/user-familhar/insert_gql.html">insert.gql</a>
-    <li><a href="../../db-operations/user-familhar/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
-    <li><a href="../../db-operations/user-familhar/select-one_gql.html">select-one.gql</a>
-    <li><a href="../../db-operations/user-pessoal/create-table_txt.html">create-table</a>
-    <li><a href="../../db-operations/user-pessoal/insert_gql.html">insert.gql</a>
-    <li><a href="../../db-operations/user-pessoal/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
-    <li><a href="../../db-operations/user-pessoal/select-one_gql.html">select-one.gql</a>
-    <li><a href="../../db-operations/user-pessoal/select_gql.html">select.gql</a>
+    <li><a href="../../await_sh.html">await.sh</a>
+    <li><a href="../../config_ru.html">config.ru</a>
+    <li><details open><summary>db-operations</summary>
+    <ul class="link-list">
+      <li><a href="../../db-operations/generic/drop-any-table.html">drop-any-table</a>
+      <li><a href="../../db-operations/generic/select-all-kind-of-users_txt.html">select-all-kind-of-users</a>
+      <li><a href="../../db-operations/generic/select-all-tables.html">select-all-tables</a>
+      <li><a href="../../db-operations/generic/select-all_gql.html">select-all.gql</a>
+      <li><a href="../../db-operations/medicamentos/create-table_txt.html">create-table</a>
+      <li><a href="../../db-operations/medicamentos/insert_gql.html">insert.gql</a>
+      <li><a href="../../db-operations/medicamentos/select_gql.html">select.gql</a>
+      <li><a href="../../db-operations/user-especialista/create-table_txt.html">create-table</a>
+      <li><a href="../../db-operations/user-especialista/insert_gql.html">insert.gql</a>
+      <li><a href="../../db-operations/user-especialista/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
+      <li><a href="../../db-operations/user-especialista/select-one_gql.html">select-one.gql</a>
+      <li><a href="../../db-operations/user-especialista/select_gql.html">select.gql</a>
+      <li><a href="../../db-operations/user-familiar/create-table_txt.html">create-table</a>
+      <li><a href="../../db-operations/user-familiar/insert_gql.html">insert.gql</a>
+      <li><a href="../../db-operations/user-familiar/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
+      <li><a href="../../db-operations/user-familiar/select-one_gql.html">select-one.gql</a>
+      <li><a href="../../db-operations/user-pessoal/create-table_txt.html">create-table</a>
+      <li><a href="../../db-operations/user-pessoal/insert_gql.html">insert.gql</a>
+      <li><a href="../../db-operations/user-pessoal/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
+      <li><a href="../../db-operations/user-pessoal/select-one_gql.html">select-one.gql</a>
+      <li><a href="../../db-operations/user-pessoal/select_gql.html">select.gql</a>
+    </ul></details>
+    <li><a href="../../docker-compose_json.html">docker-compose.json</a>
   </ul>
 </div>
 
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-familhar/create-table.txt">
+<main role="main" aria-label="Page db-operations/user-familiar/create-table.txt">
 
-<p>mutation createTableUsersFamilhar {</p>
+<p>mutation createTableUsersFamiliar {</p>
 
-<pre>usuario_familhar: createTable(
+<pre>usuario_familiar: createTable(
   keyspaceName: &quot;medtempo&quot;
-  tableName: &quot;usuario_familhar&quot;
+  tableName: &quot;usuario_familiar&quot;
   partitionKeys: [
     { name: &quot;id&quot;, type: { basic: UUID } }
     { name: &quot;email&quot;, type: { basic: TEXT } }
@@ -109,7 +119,7 @@
       name: &quot;sexo&quot;
       type: { basic: BOOLEAN } # True - Feminino, False - Masculino
     }
-    { name: &quot;parentesco&quot;, type: { basic: TEXT } }
+    { name: &quot;parentesco&quot;, type: { basic: TEXT } }   # Esse campo talvez mude
     { name: &quot;local_trabalho&quot;, type: { basic: TEXT } }
     { name: &quot;data_nascimento&quot;, type: { basic: DATE } }
     { name: &quot;hash_senha&quot;, type: { basic: TEXT } }
@@ -126,19 +136,19 @@ index_nome: createIndex(
 )
 index_data_nascimento: createIndex(
   keyspaceName: &quot;medtempo&quot;
-  tableName: &quot;usuario_familhar&quot;
+  tableName: &quot;usuario_familiar&quot;
   columnName: &quot;data_nascimento&quot;
   ifNotExists: true
 )
 index_sexo: createIndex(
   keyspaceName: &quot;medtempo&quot;
-  tableName: &quot;usuario_familhar&quot;
+  tableName: &quot;usuario_familiar&quot;
   columnName: &quot;sexo&quot;
   ifNotExists: true
 )
 index_email: createIndex(
   keyspaceName: &quot;medtempo&quot;
-  tableName: &quot;usuario_familhar&quot;
+  tableName: &quot;usuario_familiar&quot;
   columnName: &quot;email&quot;
   ifNotExists: true
 )</pre>
@@ -151,7 +161,7 @@ index_email: createIndex(
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

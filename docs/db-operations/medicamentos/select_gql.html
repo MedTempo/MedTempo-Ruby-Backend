@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one-with-pass.gql - RDoc Documentation</title>
+<title>select.gql - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -101,15 +101,24 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-especialista/select-one-with-pass.gql">
+<main role="main" aria-label="Page db-operations/medicamentos/select.gql">
 
-<p>query SelectOneUserEspecialistaWithPass($user: String!){</p>
+<p>query SelectMedicamentos ($user: String!, $medico: String!) {</p>
 
-<pre>usuario_especialista(value: { email: $user }){
-  values {
-    id,
-    email,
-    hash_senha,
+<pre>medicamentos: medicamentos(value: { usuario_pessoal: $user, usuario_especialista: $medico }){
+  values{
+    usuario_especialista,
+    usuario_pessoal,
+    nome,
+    intervalo_uso,
+    tempo_uso,
+    dosagem,
+    metodo_uso,
+    dosagem,
+    reacoes_adversas,
+    contra_indicacao,
+    orientacao,
+    data_criacao
   }
 }</pre>
 

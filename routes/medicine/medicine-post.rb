@@ -28,7 +28,12 @@ module MedicinePost
     ["/medicine"].each do | path | Sinatra::Application::post path do
         auth = protection!([2])
         
-        medicine = JSON.parse(request.body.read)
+        begin
+            medicine = JSON.parse(request.body.read)
+        rescue => exception
+            logger.info exception
+            return halt 400, JSON.generate({ :message => "parse error" })
+        end
 
         verify! medicine,[
             #"usuario_especialista",

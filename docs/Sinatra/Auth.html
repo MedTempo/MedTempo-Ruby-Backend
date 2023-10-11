@@ -94,18 +94,20 @@
        </header>
 
       <div id="method-i-protection-21" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">protection!</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">protection!</span><span
+              class="method-args">(allowed = [1,2,3])</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="protection-21-source">
-            <pre><span class="ruby-comment"># File helpers/auth.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protection!</span>
+            <pre><span class="ruby-comment"># File helpers/auth.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protection!</span>(<span class="ruby-identifier">allowed</span> = [<span class="ruby-value">1</span>,<span class="ruby-value">2</span>,<span class="ruby-value">3</span>])
    <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&quot;Protection Helper Begin:&quot;</span>
 
 
@@ -117,19 +119,39 @@
 
      <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">ip</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">jwt</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;ip&quot;</span>]
       <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&quot;ok&quot;</span>
-     <span class="ruby-keyword">elsif</span> 
-      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;ivalid Host&quot;</span>
+     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Ivalid Host&quot;</span>
      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment">#puts jwt[0]</span>
+    <span class="ruby-comment">#puts &quot;\n\n\n\n\n\nPermision type for #{jwt[0][&quot;user_type&quot;]} is #{allowed.include?(jwt[0][]) == false}\n\n\n\n\n&quot;</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">allowed</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">jwt</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;user_type&quot;</span>]) <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">PermissionErr</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">JWT</span><span class="ruby-operator">::</span><span class="ruby-constant">DecodeError</span>, <span class="ruby-constant">JWT</span><span class="ruby-operator">::</span><span class="ruby-constant">ExpiredSignature</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">error</span>
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">error</span>
+      <span class="ruby-identifier">session</span>[<span class="ruby-value">:jwt</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">halt</span> <span class="ruby-value">401</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>({ <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;You Shall Not Pass! #{error}&quot;</span> })
+
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PermissionErr</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">error</span>
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">error</span>
+      <span class="ruby-identifier">session</span>[<span class="ruby-value">:jwt</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">halt</span> <span class="ruby-value">403</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>({ <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;You dont have necessary permission to proceed. Error for #{jwt[0][&quot;user_type&quot;]}&quot;</span> })
 
     <span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">error</span>
       <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">error</span>
       <span class="ruby-identifier">session</span>[<span class="ruby-value">:jwt</span>] = <span class="ruby-keyword">nil</span>
-      <span class="ruby-identifier">halt</span> <span class="ruby-value">401</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>({ <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;You Shall Not Pass! #{error}&quot;</span> })
+      <span class="ruby-identifier">halt</span> <span class="ruby-value">500</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>({ <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;Something Wrong is Not Right! #{error}&quot;</span> })
+
     <span class="ruby-keyword">end</span>
+
   <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">halt</span> <span class="ruby-value">400</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>({ <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Invalid Token Format&quot;</span> })
   <span class="ruby-keyword">end</span>
 
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">jwt</span>[<span class="ruby-value">0</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -145,7 +167,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

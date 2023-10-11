@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>select-one-with-pass.gql - RDoc Documentation</title>
+<title>create-table - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../";
@@ -101,17 +101,47 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page db-operations/user-especialista/select-one-with-pass.gql">
+<main role="main" aria-label="Page db-operations/medicamentos/create-table.txt">
 
-<p>query SelectOneUserEspecialistaWithPass($user: String!){</p>
+<p>mutation createMedicamentos {</p>
 
-<pre>usuario_especialista(value: { email: $user }){
-  values {
-    id,
-    email,
-    hash_senha,
-  }
-}</pre>
+<pre>medicamentos: createTable(
+  keyspaceName: &quot;medtempo&quot;
+  tableName: &quot;medicamentos&quot;
+  partitionKeys: [
+    { name: &quot;id&quot;, type: { basic: UUID } }
+    { name: &quot;usuario_especialista&quot;, type: { basic: TEXT } }
+    { name: &quot;usuario_pessoal&quot;, type: { basic: TEXT } }
+  ]
+  values: [
+    { name: &quot;nome&quot;, type: { basic: TEXT } }
+    { name: &quot;descricao&quot;, type: { basic: TEXT } }
+    { name: &quot;intervalo_uso&quot;, type: { basic: TEXT }}
+    { name: &quot;tempo_uso&quot;, type: { basic: DATE }}
+    { name: &quot;dosagem&quot;, type: { basic: TEXT }}
+    { name: &quot;metodo_uso&quot;, type: { basic: TEXT }}
+    { name: &quot;reacoes_adversas&quot;, type: { basic: LIST, info: { subTypes: { basic: TEXT }, frozen: false } } }
+    { name: &quot;contra_indicacao&quot;, type: { basic: LIST, info: { subTypes: { basic: TEXT }, frozen: false } } } # depois transformar em array
+    { name: &quot;orientacao&quot;, type: { basic: TEXT } }
+    { name: &quot;data_criacao&quot;, type: { basic: DATE } }
+    { name: &quot;tomado&quot;, type: { basic: BOOLEAN }}
+  ]
+  ifNotExists: true
+)
+
+  index_user_pessoal: createIndex(
+  keyspaceName: &quot;medtempo&quot;
+  tableName: &quot;medicamentos&quot;
+  columnName: &quot;usuario_pessoal&quot;
+  ifNotExists: true
+              )
+
+    index_user_especialista: createIndex(
+  keyspaceName: &quot;medtempo&quot;
+  tableName: &quot;medicamentos&quot;
+  columnName: &quot;usuario_especialista&quot;
+  ifNotExists: true
+              )</pre>
 
 <p>}</p>
 

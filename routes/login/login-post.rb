@@ -31,7 +31,12 @@ module LoginPost
 
         content_type "application/json"
 
-        user = JSON.parse(request.body.read)
+        begin
+            user = JSON.parse(request.body.read)
+        rescue => exception
+            logger.info exception
+            return halt 400, JSON.generate({ :message => "parse error" })
+        end
 
         logger.info user
 

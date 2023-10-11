@@ -64,27 +64,37 @@
     <li><a href="./COPYING_txt.html">COPYING</a>
     <li><a href="./DOCS-LICENSE_txt.html">DOCS-LICENSE</a>
     <li><a href="./Dockerfile.html">Dockerfile</a>
+    <li><a href="./Dockerfile-native.html">Dockerfile-native</a>
     <li><a href="./Gemfile.html">Gemfile</a>
     <li><a href="./Gemfile_lock.html">Gemfile.lock</a>
     <li><a href="./Readme_md.html">Readme</a>
-    <li><a href="./db-operations/generic/drop-any-table.html">drop-any-table</a>
-    <li><a href="./db-operations/generic/select-all-kind-of-users_txt.html">select-all-kind-of-users</a>
-    <li><a href="./db-operations/generic/select-all-tables.html">select-all-tables</a>
-    <li><a href="./db-operations/generic/select-all_gql.html">select-all.gql</a>
-    <li><a href="./db-operations/user-especialista/create-table_txt.html">create-table</a>
-    <li><a href="./db-operations/user-especialista/insert_gql.html">insert.gql</a>
-    <li><a href="./db-operations/user-especialista/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
-    <li><a href="./db-operations/user-especialista/select-one_gql.html">select-one.gql</a>
-    <li><a href="./db-operations/user-especialista/select_gql.html">select.gql</a>
-    <li><a href="./db-operations/user-familhar/create-table_txt.html">create-table</a>
-    <li><a href="./db-operations/user-familhar/insert_gql.html">insert.gql</a>
-    <li><a href="./db-operations/user-familhar/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
-    <li><a href="./db-operations/user-familhar/select-one_gql.html">select-one.gql</a>
-    <li><a href="./db-operations/user-pessoal/create-table_txt.html">create-table</a>
-    <li><a href="./db-operations/user-pessoal/insert_gql.html">insert.gql</a>
-    <li><a href="./db-operations/user-pessoal/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
-    <li><a href="./db-operations/user-pessoal/select-one_gql.html">select-one.gql</a>
-    <li><a href="./db-operations/user-pessoal/select_gql.html">select.gql</a>
+    <li><a href="./await_sh.html">await.sh</a>
+    <li><a href="./config_ru.html">config.ru</a>
+    <li><details><summary>db-operations</summary>
+    <ul class="link-list">
+      <li><a href="./db-operations/generic/drop-any-table.html">drop-any-table</a>
+      <li><a href="./db-operations/generic/select-all-kind-of-users_txt.html">select-all-kind-of-users</a>
+      <li><a href="./db-operations/generic/select-all-tables.html">select-all-tables</a>
+      <li><a href="./db-operations/generic/select-all_gql.html">select-all.gql</a>
+      <li><a href="./db-operations/medicamentos/create-table_txt.html">create-table</a>
+      <li><a href="./db-operations/medicamentos/insert_gql.html">insert.gql</a>
+      <li><a href="./db-operations/medicamentos/select_gql.html">select.gql</a>
+      <li><a href="./db-operations/user-especialista/create-table_txt.html">create-table</a>
+      <li><a href="./db-operations/user-especialista/insert_gql.html">insert.gql</a>
+      <li><a href="./db-operations/user-especialista/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
+      <li><a href="./db-operations/user-especialista/select-one_gql.html">select-one.gql</a>
+      <li><a href="./db-operations/user-especialista/select_gql.html">select.gql</a>
+      <li><a href="./db-operations/user-familiar/create-table_txt.html">create-table</a>
+      <li><a href="./db-operations/user-familiar/insert_gql.html">insert.gql</a>
+      <li><a href="./db-operations/user-familiar/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
+      <li><a href="./db-operations/user-familiar/select-one_gql.html">select-one.gql</a>
+      <li><a href="./db-operations/user-pessoal/create-table_txt.html">create-table</a>
+      <li><a href="./db-operations/user-pessoal/insert_gql.html">insert.gql</a>
+      <li><a href="./db-operations/user-pessoal/select-one-with-pass_gql.html">select-one-with-pass.gql</a>
+      <li><a href="./db-operations/user-pessoal/select-one_gql.html">select-one.gql</a>
+      <li><a href="./db-operations/user-pessoal/select_gql.html">select.gql</a>
+    </ul></details>
+    <li><a href="./docker-compose_json.html">docker-compose.json</a>
   </ul>
 </div>
 
@@ -97,9 +107,13 @@
 
 <pre>remote: https://rubygems.org/
 specs:
+  amq-protocol (2.3.2)
   argon2 (2.2.0)
     ffi (~&gt; 1.15)
     ffi-compiler (~&gt; 1.0)
+  bunny (2.22.0)
+    amq-protocol (~&gt; 2.3, &gt;= 2.3.1)
+    sorted_set (~&gt; 1, &gt;= 1.0.2)
   ffi (1.15.5)
   ffi-compiler (1.0.1)
     ffi (&gt;= 1.0.0)
@@ -116,12 +130,17 @@ specs:
   rack-test (2.1.0)
     rack (&gt;= 1.3)
   rake (13.0.6)
+  rbtree (0.4.6)
   ruby2_keywords (0.0.5)
+  set (1.0.3)
   sinatra (3.0.6)
     mustermann (~&gt; 3.0)
     rack (~&gt; 2.2, &gt;= 2.2.4)
     rack-protection (= 3.0.6)
     tilt (~&gt; 2.0)
+  sorted_set (1.0.3)
+    rbtree
+    set (~&gt; 1.0)
   tilt (2.2.0)</pre>
 
 <p>PLATFORMS</p>
@@ -132,6 +151,7 @@ specs:
 <p>DEPENDENCIES</p>
 
 <pre class="ruby"><span class="ruby-identifier">argon2</span>
+<span class="ruby-identifier">bunny</span>
 <span class="ruby-identifier">jwt</span>
 <span class="ruby-identifier">puma</span>
 <span class="ruby-identifier">rack</span><span class="ruby-operator">-</span><span class="ruby-identifier">test</span>
@@ -148,7 +168,7 @@ specs:
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
