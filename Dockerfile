@@ -32,8 +32,7 @@ EXPOSE 9292
 
 FROM base as dev
 
-#CMD [ "bundle", "exec", "rackup", "--port", "7777", "--host", "0.0.0.0" ]
-CMD [ "./await.sh" ]
+CMD [ "bundle", "exec", "rackup", "--port", "7777", "--host", "0.0.0.0" ]
 
 FROM base as test
 

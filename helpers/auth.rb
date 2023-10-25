@@ -28,7 +28,7 @@ module Sinatra
     def protection!(allowed = [1,2,3])
        logger.info "Protection Helper Begin:"
 
-
+   
       #if session[:jwt].kind_of? String 
 
         begin

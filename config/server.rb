@@ -28,11 +28,21 @@ require "./config/worker-queue"
 # Sinatra Configurations
 
 include Rack
+include Sinatra
 
+#set :session_store, Rack::Session::Pool
+
+#set :session_secret, 'your_secret'
+#set :session_path, '/'
+#set :session_key, 'rack.session'
+set :sessions, true
+set :session_secret, ENV["SESSION_SECRET"]
+
+=begin use Rack::Protection,  :except => [:remote_token, :http_origin] 
 use Rack::Session::Cookie, :key => 'rack.session',
 :path => '/',
 :secret => 'your_secret'
-
+=end
 
 Sinatra::Application::configure :production do
     Sinatra::Application::set :logging, false
