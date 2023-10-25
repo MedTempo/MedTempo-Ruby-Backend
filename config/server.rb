@@ -26,8 +26,40 @@ require "./config/worker-queue"
 
 ##
 # Sinatra Configurations
-#module ServerConfig
-    include Rack
+
+include Rack
+
+use Rack::Session::Cookie, :key => 'rack.session',
+:path => '/',
+:secret => 'your_secret'
+
+
+Sinatra::Application::configure :production do
+    Sinatra::Application::set :logging, false
+    Sinatra::Application::set :bind, '0.0.0.0'
+end
+
+Sinatra::Application::configure :development do
+    Sinatra::Application::set :logging, true
+end  
+
+Sinatra::Application::set :port, ENV["PORT"]
+
+##
+# Set Cors Headers
+Cors::allow [ "https://med-tempo.vercel.app", "http://localhost:4200", "https://localhost:443", "capacitor://localhost", "ionic://localhost" ]
+
+##
+# Load Controllers
+Load::router
+
+##
+# Load Helpers
+Load::helpers
+
+
+
+
     #def self.defaults
 
         # Sinatra::Application::set :environment, :production
@@ -49,33 +81,3 @@ require "./config/worker-queue"
             end
         end
 =end
-        use Rack::Session::Cookie, :key => 'rack.session',
-        :path => '/',
-        :secret => 'your_secret'
-
-
-        Sinatra::Application::configure :production do
-            Sinatra::Application::set :logging, false
-            Sinatra::Application::set :bind, '0.0.0.0'
-        end
-
-        Sinatra::Application::configure :development do
-            Sinatra::Application::set :logging, true
-        end  
-
-        Sinatra::Application::set :port, ENV["PORT"]
-        
-        ##
-        # Set Cors Headers
-        Cors::allow [ "https://med-tempo.vercel.app", "http://localhost:4200", "https://localhost:443", "capacitor://localhost", "ionic://localhost" ]
-
-        ##
-        # Load Controllers
-        Load::router
-
-        ##
-        # Load Helpers
-        Load::helpers
-
-    #end
-#end
