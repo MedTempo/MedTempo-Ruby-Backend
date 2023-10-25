@@ -26,4 +26,4 @@ require "./config/server"
 ##
 # Import sinatra settings
 
-ServerConfig::defaults
+#ServerConfig::defaults

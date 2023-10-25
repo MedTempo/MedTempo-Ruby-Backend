@@ -19,23 +19,40 @@
 =end
 
 require "sinatra/base"
+require "rack"
 require "./config/cors"
 require "./config/loader"
 require "./config/worker-queue"
 
 ##
 # Sinatra Configurations
-module ServerConfig
-    def self.defaults
+#module ServerConfig
+    include Rack
+    #def self.defaults
 
         # Sinatra::Application::set :environment, :production
 
         ##
         # Enable sinatra sessions for store data with session[:key]
-        Sinatra::Application::set :sessions, true
+=begin        Sinatra::Application::set :sessions, true
+        Sinatra::Application::set :protection, false
 
         ##
         # Enable configs acording the actual enviroment
+
+        Sinatra::Application::configure do 
+            Sinatra::Application::set :cookie_options do
+                {
+                    :same_site => :none,
+                    :secure => true
+                }
+            end
+        end
+=end
+        use Rack::Session::Cookie, :key => 'rack.session',
+        :path => '/',
+        :secret => 'your_secret'
+
 
         Sinatra::Application::configure :production do
             Sinatra::Application::set :logging, false
@@ -60,5 +77,5 @@ module ServerConfig
         # Load Helpers
         Load::helpers
 
-    end
-end
+    #end
+#end

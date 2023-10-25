@@ -30,6 +30,6 @@ module MedicineGet
 
 
         res = Db.execute(Db.db_operations["medicamentos"]["select"], { :user => auth["user"], :medico => doctor || "" } , false)
-        body res           
+        body JSON.generate(res["data"]["medicamentos"])           
     end end
 end

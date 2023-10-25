@@ -26,6 +26,6 @@ module IndexGet
     ["/"].each do | path | Sinatra::Application::get path do
         protection!
         res = Db.execute(Db.db_operations["generic"]["select-all"], { :keyspace => Db.db_keyspace }, true)
-        body res      
+        body JSON.generate(res)      
     end end
 end

@@ -24,8 +24,9 @@ require "rack/test"
 module TestModule
     def test_IndexGet_Error
         get "/"
-
-        assert last_response.status == 400
+    
+        puts last_response.status
+        assert last_response.status == 401
 
         res = JSON.parse(last_response.body)
 

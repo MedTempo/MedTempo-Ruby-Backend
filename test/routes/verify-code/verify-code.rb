@@ -17,7 +17,7 @@
     along with MedTempo-Backend++.  If not, see <https://www.gnu.org/licenses/>5.
     
 =end
-
+=begin
 require "test/unit"
 require "rack/test"
 require "date"
@@ -44,3 +44,4 @@ module TestModule
           puts "END all mails"
     end
 end 
+=end

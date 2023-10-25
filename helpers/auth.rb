@@ -29,7 +29,7 @@ module Sinatra
        logger.info "Protection Helper Begin:"
 
 
-      if session[:jwt].kind_of? String 
+      #if session[:jwt].kind_of? String 
 
         begin
           jwt = JWT.decode session[:jwt], ENV["ENV_SECRET"], true, { :algorithm => "HS512" }
@@ -65,9 +65,10 @@ module Sinatra
     
         end
 
-      else
-          halt 400, JSON.generate({ :message => "Invalid Token Format" })
-      end
+      #else
+      #    session.inspect
+      #    halt 400, JSON.generate({ :message => "Invalid Token Format" })
+      #end
 
       return jwt[0]
     end
